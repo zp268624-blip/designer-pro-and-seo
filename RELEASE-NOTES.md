@@ -1,5 +1,10 @@
 # Release Notes
 
+## v1.0.2 — 2026-07-05 — README banner
+
+Added a header banner image (`assets/banner.png`) at the top of the README. No code,
+skill, or gate change.
+
 ## v1.0.1 — 2026-07-04 — docs clarity pass
 
 README + marketplace-description polish only — no code or skill-behavior change (gates
