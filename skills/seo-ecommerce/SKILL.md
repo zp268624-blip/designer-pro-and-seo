@@ -1,6 +1,6 @@
 ---
 name: seo-ecommerce
-description: E-commerce SEO — product-page on-page optimization, Product schema validation, image SEO, and (optionally) Google Shopping/Amazon marketplace intelligence. Trigger when the user says "ecommerce SEO", "product SEO", "Google Shopping", "marketplace SEO", "product schema", "Amazon SEO", "product listings", "shopping ads", or "merchant SEO".
+description: Optimizes e-commerce SEO across product and category pages — on-page product elements, Product schema validation, image SEO, and faceted/canonical strategy for filters and variants. Uses DataForSEO Merchant for Google Shopping and Amazon marketplace intelligence when connected; otherwise audits feed basics and on-page signals manually. Trigger when the user says "ecommerce SEO", "product SEO", "product schema", "Google Shopping", "Amazon SEO", "marketplace SEO", "product listings", "shopping ads", or "merchant SEO".
 ---
 
 # seo-ecommerce

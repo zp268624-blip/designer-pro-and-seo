@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zephyr Corp - Cedar Benches</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <a href="#main">Skip to content</a>
+  <header>
+    <nav aria-label="Primary">Home / Products / Contact</nav>
+  </header>
+  <main id="main">
+    <h1>Cedar benches built to last</h1>
+
+    <!-- Issue 1: heading level jumps h1 -> h3 (a skipped h2). -->
+    <h3>Warranty</h3>
+    <p>Every Zephyr Corp bench ships with a 10-year structural warranty.</p>
+
+    <!-- Issue 2: this product image has no alt attribute. -->
+    <img src="bench-oak.jpg">
+
+    <img src="bench-cedar.jpg" alt="A cedar bench on a covered patio">
+
+    <form>
+      <label for="email">Email for the care guide</label>
+      <input id="email" type="email" name="email">
+      <input type="submit" value="Send me the guide">
+    </form>
+  </main>
+  <footer>(c) Zephyr Corp, acme.example</footer>
+</body>
+</html>

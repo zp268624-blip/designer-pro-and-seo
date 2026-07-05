@@ -1,6 +1,6 @@
 ---
 name: parallel-build
-description: Spin up multiple website or page variants in parallel using git worktrees (or sibling folders) and sub-agents, each with a different inspiration source but the same brief and shared design tokens, for side-by-side comparison. Trigger when the user says "parallel build", "build three versions", "spin up variants", "make 3 sites at once", "side-by-side build", or wants different design flavors to compare.
+description: Spin up multiple website or page variants in parallel — each in its own git worktree or sibling folder, built by a sub-agent from the same brief and shared design tokens but a different inspiration source — then cherry-pick and merge the best sections into one final. Captures side-by-side comparison screenshots when Playwright is connected; otherwise renders a structured comparison summary. Trigger when the user says "parallel build", "build three versions", "spin up variants", "make 3 sites at once", "side-by-side build", or "different design flavors to compare".
 ---
 
 # parallel-build
@@ -19,7 +19,7 @@ a side-by-side comparison and cherry-picks the best sections into a merged final
 
 - "parallel build" / "build three versions" / "spin up variants"
 - "make 3 sites at once" / "side-by-side build"
-- "different flavors to compare"
+- "different design flavors to compare"
 
 ## Inputs
 
@@ -34,13 +34,17 @@ a side-by-side comparison and cherry-picks the best sections into a merged final
 2. **Generate shared tokens once** with `design-system-gen` so all variants share a
    coherent palette/type/effects — consistency across variants, distinctiveness via
    inspiration + layout.
-3. **Create N output locations** — git worktrees (the `using-git-worktrees` pattern)
-   or, if git isn't available, sibling folders `variant-1/ … variant-N/`.
-4. **Dispatch N sub-agents in parallel**, each running `design-build` with the same
-   brief + shared tokens but its own inspiration source. One-shot each (iterate only
-   if needed).
-5. **Collect** outputs and render a side-by-side comparison (screenshots via
-   `design-visual-qa` if Playwright is present, else a structured summary).
+3. **Create N output locations** — git worktrees (one per variant) or, if git isn't
+   available, sibling folders `variant-1/ … variant-N/`.
+4. **Dispatch N build sub-agents in parallel** behind the shared-token barrier — each
+   runs the `design-build` skill with the same brief + the one shared token set from
+   step 2, differing only by inspiration source. (`design-build` is an orchestrator, so
+   each variant runs it as a skill inside its own sub-agent — not as a dispatched-leaf
+   agent; the barrier guarantees every variant shares one palette/type/effects system.)
+   One-shot each (iterate only if needed).
+5. **Collect** outputs and render a side-by-side comparison. When Playwright is
+   connected, fan out one `design-visual-qa` agent per variant for screenshot capture
+   and cross-variant diffs; otherwise render a structured comparison summary.
 6. **Cherry-pick + merge.** The user picks sections from each; assemble the final and
    run `qa-gate` before delivery.
 
@@ -52,10 +56,17 @@ a side-by-side comparison and cherry-picks the best sections into a merged final
 
 ## Dependencies
 
-- `design-system-gen` (shared tokens), `design-build` (per-variant build), sub-agent
-  dispatch; git worktrees (optional — falls back to sibling folders)
-- Optional: `html-extract` (inspiration), `design-visual-qa` (comparison shots),
-  `qa-gate` (final)
+- `design-system-gen` (required) — generates the shared tokens once so every variant
+  shares one palette/type/effects system
+- `design-build` (required) — runs the per-variant build inside each sub-agent
+- `html-extract` (optional — adds auto-sourced inspiration per variant; free path: user
+  supplies the inspiration sources)
+- `design-visual-qa` (optional — adds side-by-side comparison screenshots via Playwright;
+  free path: structured comparison summary)
+- `qa-gate` (optional — adds a structured PASS/FAIL gate on the merged final; free path:
+  manual review before handoff)
+- Sub-agent dispatch + git worktrees (optional — falls back to sibling folders
+  `variant-1/ … variant-N/`)
 
 ## Notes
 

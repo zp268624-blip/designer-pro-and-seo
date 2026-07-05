@@ -54,10 +54,13 @@ offer so it sounds specific, not generic.
 
 ## Dependencies
 
-- None required (pure method). Composes with `design-cro`, `blast-prompt`,
-  `design-system-gen` (for tone).
+- None required (pure method).
 
 ## Notes
+
+Related skills: `design-cro` (pressure-tests the copy), `blast-prompt` (carries the
+copy into a build brief), `design-system-gen` (tone) — composed, not hard-depended
+(one-directional graph; keeps the copywriting↔design-cro edge out of Dependencies).
 
 Truth-in-copy: don't write claims the client can't back up. Flag any
 performance/outcome claim that needs a citation or disclaimer before it ships.

@@ -1,6 +1,6 @@
 ---
 name: seo-google
-description: Real Google field data — Search Console (impressions/clicks/CTR/position, URL Inspection, sitemaps), PageSpeed Insights, CrUX field CWV, GA4 organic — when a Search Console MCP or Google APIs are connected; otherwise runs built-in on-page technical + GEO checks and tells you exactly what to connect for field data. Trigger when the user says "search console", "GSC", "PageSpeed", "PSI", "CrUX", "field data", "indexing API", "GA4 organic", "URL inspection", "real CWV data", "impressions", "clicks", "CTR", "LCP", "INP", "CLS".
+description: Pulls real Google field data — Search Console search analytics (impressions, clicks, CTR, position), URL Inspection and sitemap status, PageSpeed Insights and CrUX Core Web Vitals (LCP, INP, CLS), and GA4 organic traffic. Uses a connected Search Console MCP or Google APIs when available; otherwise runs built-in on-page technical and GEO checks and names exactly what to connect for field data. Trigger when the user says "search console", "GSC", "PageSpeed", "CrUX", "field data", "GA4 organic", "URL inspection", or "real CWV data".
 ---
 
 # seo-google
@@ -42,15 +42,15 @@ What field data adds when connected:
 
 ## Steps
 
-1. **Detect available tooling.** Run `scripts/workflow/capability_probe.py` (env
+1. **Detect available tooling.** Run `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/workflow/capability_probe.py"` (env
    keys) and check whether a Search Console / Google MCP is exposed this session.
 2. **Field-data path (Tier 1, if connected).** Call the connected GSC/Google MCP or
    Google APIs for the requested signal; normalize into a compact table; for CrUX,
    overlay the available history.
 3. **Built-in path (Tier 2, always available).** Fetch the page with WebFetch and
-   run `scripts/seo/tech_audit.py` (on-page technical: title/meta, canonical, robots,
+   run `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/seo/tech_audit.py"` (on-page technical: title/meta, canonical, robots,
    viewport, structured-data presence, security headers, INP<200ms guidance) and
-   `scripts/seo/geo_check.py` (AI-citability + llms.txt). This is real, useful output
+   `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/seo/geo_check.py"` (AI-citability + llms.txt). This is real, useful output
    on its own — it just isn't *field* data.
 4. **Report which tier ran** and, if field data wasn't available, the one-line setup
    to unlock it (connect a Search Console MCP, or set Google API OAuth).

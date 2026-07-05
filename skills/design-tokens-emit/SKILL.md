@@ -34,6 +34,8 @@ the palette/typography/effects become part of the build instead of staying a doc
    ```
    python3 "${CLAUDE_PLUGIN_ROOT}/scripts/design/tokens_emit.py" --design-json ds.json --format all --out-dir tokens/
    ```
+   On Windows, use `py` if `python3` is absent; in PowerShell the variable is
+   `$env:CLAUDE_PLUGIN_ROOT`.
    Produces `tokens.css` (`:root` custom properties), `tailwind.tokens.js` (merge
    into `theme.extend`), `_tokens.scss`, and `tokens.json` (Style-Dictionary shape).
    Use `--print` to preview without writing.
@@ -51,7 +53,7 @@ the palette/typography/effects become part of the build instead of staying a doc
 ## Dependencies
 
 - `scripts/design/tokens_emit.py` (required) — Python 3.10+, standard library only
-- `design-system-gen` (upstream source of the tokens)
+- `design-system-gen` (required) — upstream source of the design JSON the emitter reads
 
 ## Notes
 

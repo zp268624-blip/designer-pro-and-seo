@@ -72,6 +72,32 @@ def contrast_ratio(c1, c2):
     return round((hi + 0.05) / (lo + 0.05), 2)
 
 
+DARK_INK = "#111418"  # the same near-black the on-primary picker uses
+
+
+def _mix(c1, c2, t):
+    """Deterministic sRGB blend of two #rrggbb colors; t in 0..1 = weight toward c2.
+    Integer channels + round() -> byte-reproducible, no float drift in the output."""
+    a = [int(c1.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)]
+    b = [int(c2.lstrip("#")[i:i + 2], 16) for i in (0, 2, 4)]
+    return "#{:02x}{:02x}{:02x}".format(
+        *[round(a[k] + (b[k] - a[k]) * t) for k in range(3)])
+
+
+def _contrast_floor(color, against, target, steps=20, toward=DARK_INK):
+    """Deepen `color` toward `toward` in fixed integer steps only until it clears a
+    contrast `target` against `against` (WCAG 1.4.11 non-text 3:1 for focus rings and
+    action fills). Returns `color` untouched when it already clears; the stepped search
+    is deterministic, so the result is byte-reproducible."""
+    if contrast_ratio(color, against) >= target:
+        return color
+    for i in range(1, steps + 1):
+        c = _mix(color, toward, i / steps)
+        if contrast_ratio(c, against) >= target:
+            return c
+    return _mix(color, toward, 1.0)
+
+
 def build_palette(industry, mood, hue, sat, light):
     primary = hsl_to_hex(hue, sat, light)
     # Secondary: analogous shift, slightly desaturated.
@@ -92,6 +118,17 @@ def build_palette(industry, mood, hue, sat, light):
     white, dark = "#ffffff", "#111418"
     on_primary = white if contrast_ratio(white, primary) >= contrast_ratio(dark, primary) else dark
     on_primary_contrast = round(max(contrast_ratio(white, primary), contrast_ratio(dark, primary)), 2)
+    # Modern semantic slots (computed from the colors above + the luminance formula;
+    # additive, still byte-reproducible). card = an elevated surface (lighter than the
+    # base surface); muted / border = a surface nudged toward text by a small / larger
+    # amount (a recessed panel, then a visible-but-subtle divider); ring = the brand
+    # primary deepened just enough to clear the WCAG 1.4.11 3:1 non-text floor for a
+    # focus indicator; destructive = the error red held to the same 3:1 action floor.
+    card = _mix(surface, white, 0.5)
+    muted = _mix(surface, text, 0.06)
+    border = _mix(surface, text, 0.16)
+    ring = _contrast_floor(primary, bg, 3.0)
+    destructive = _contrast_floor(error, bg, 3.0)
     name = f"{industry}-{mood}"
     tags = ";".join([industry, mood.split('-')[0], "light", "generated"])
     return {
@@ -107,6 +144,11 @@ def build_palette(industry, mood, hue, sat, light):
         "success": success,
         "warning": warning,
         "error": error,
+        "card": card,
+        "muted": muted,
+        "border": border,
+        "ring": ring,
+        "destructive": destructive,
         "text_on_bg_contrast": text_on_bg,
         "primary_on_bg_contrast": primary_on_bg,
         "on_primary": on_primary,

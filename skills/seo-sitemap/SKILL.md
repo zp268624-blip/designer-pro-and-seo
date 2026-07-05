@@ -1,6 +1,6 @@
 ---
 name: seo-sitemap
-description: XML sitemap audit and generation (sitemaps.org compliant). Validates structure and enforces quality gates (no 404s, no noindex pages, no canonical-elsewhere pages), and generates sitemaps with automatic index splitting past 50,000 URLs. Trigger when the user says "sitemap", "generate sitemap", "sitemap issues", "XML sitemap", or "sitemap index".
+description: Audits and generates sitemaps.org-compliant XML sitemaps. Validates structure (well-formed XML, the 50,000-URL / 50 MB limits, absolute URLs) and flags sampled URLs that 404, are noindexed, or canonicalize elsewhere; splits into a sitemap index automatically past 50,000 URLs. Trigger when the user says "sitemap", "XML sitemap", "generate sitemap", "validate sitemap", "sitemap issues", or "sitemap index".
 ---
 
 # seo-sitemap
@@ -48,6 +48,35 @@ elsewhere should never be in a sitemap.
 4. **Lastmod discipline:** set `lastmod` from real content-change dates, not
    auto-bumped to today on every regen (Google learns to distrust it otherwise).
 5. **Robots:** confirm `robots.txt` has a `Sitemap:` directive pointing to it.
+
+## Capability routing
+
+This skill follows the plugin's capability-tier cascade
+(`references/CAPABILITY-TIERS.md`) and always produces a validated sitemap:
+
+1. **Tier 1 — Firecrawl MCP.** When connected, crawl the live site to discover the
+   true URL set (including JS-only pages) before validating or generating.
+2. **Tier 2 — built-in (the default).** Otherwise `sitemap_tools.py` validates
+   structure deterministically and generates a sitemaps.org-compliant file from a
+   URL list, with `site_map.py` supplying the robots + sitemap-recursion inventory.
+   Fully offline — this is the product.
+3. **Tier 4 — guided.** If the URL set must come from a JS-rendered crawl and
+   Firecrawl isn't connected, deliver the structural validation + generation and
+   name what a full crawl would add.
+
+```capability-routing
+capability:   site-map
+tier1:        Firecrawl MCP
+tier1_signal: FIRECRAWL_API_KEY | FIRECRAWL_API_URL
+tier2:        sitemap_tools.py (validate + generate, sitemaps.org limits) + site_map.py (robots + sitemap recursion -> URL inventory)
+tier2_yields: validated sitemaps.org-compliant sitemap + 404/noindex/canonical offender list, zero spend
+tier3:        none
+tier3_signal: none
+tier4:        paste the sitemap or URL list; add a Firecrawl MCP to discover JS-only URLs for a full inventory
+needs_tier1:  none
+```
+
+Always end by stating which tier ran and what a full crawl would add.
 
 ## Outputs
 

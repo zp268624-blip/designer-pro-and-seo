@@ -24,6 +24,35 @@ import os
 import re
 import sys
 
+import match  # local sibling: the clean-room weighted ranker (scripts/design/match.py)
+
+# --- ranker selection ----------------------------------------------------------------
+# DEFAULT = "new" (the clean-room weighted-IDF ranker in match.py). "legacy" reproduces
+# the original raw token-overlap behavior EXACTLY and is the documented one-release
+# revert path (flip DPS_RANKER=legacy or pass --ranker legacy). Resolution order:
+# explicit --ranker arg > DPS_RANKER env var > "new".
+RANKERS = ("new", "legacy")
+
+
+def _resolve_ranker(arg_value):
+    if arg_value in RANKERS:
+        return arg_value
+    env = (os.environ.get("DPS_RANKER") or "").strip().lower()
+    return env if env in RANKERS else "new"
+
+
+# Per-picker field-weight ladders for the NEW ranker (our own; identity/name fields
+# weigh most, mood/tags next, long prose least). See match.py for the scoring model.
+PRODUCT_WEIGHTS = [("product_type", 3.0), ("industry", 2.0),
+                   ("recommended_style", 1.5), ("key_sections", 1.0), ("notes", 0.8)]
+STYLE_WEIGHTS = [("style", 3.0), ("mood_tags", 2.0), ("best_for", 1.5),
+                 ("characteristics", 1.0), ("summary", 0.8)]
+PALETTE_WEIGHTS = [("name", 2.5), ("mood", 2.0), ("industry", 2.0), ("tags", 1.2)]
+TYPO_WEIGHTS = [("name", 2.5), ("mood", 2.0), ("best_for", 1.5)]
+
+AA_BONUS = 0.5       # palette tie-break: a WCAG-AA-passing palette edges a tie (< floor)
+AVOID_PENALTY = 2.0  # style: query token in a row's avoid_for damps it (legacy parity)
+
 
 def _data_dir(override=None):
     if override:
@@ -60,33 +89,40 @@ def _overlap(query_tokens, *fields):
     return len(query_tokens & row_tokens)
 
 
-def pick_product(rows, product_type, industry, qtokens):
-    """Returns (row_or_None, matched_bool)."""
+def pick_product(rows, product_type, industry, qtokens, ranker="new"):
+    """Returns (row_or_None, matched_bool). Exact product_type match always wins (both
+    rankers); only the fall-through scoring differs by ranker."""
     if not rows:
         return None, False
     for r in rows:
         if r.get("product_type", "").lower() == (product_type or "").lower():
             return r, True
-    best, best_s = None, 0
     pt = _tokens(product_type) | _tokens(industry) | qtokens
-    for r in rows:
-        s = _overlap(pt, r.get("product_type"), r.get("industry"),
-                     r.get("notes"), r.get("key_sections"), r.get("recommended_style"))
-        if s > best_s:
-            best, best_s = r, s
-    return (best, True) if best_s > 0 else (rows[0], False)
+    if ranker == "legacy":
+        best, best_s = None, 0
+        for r in rows:
+            s = _overlap(pt, r.get("product_type"), r.get("industry"),
+                         r.get("notes"), r.get("key_sections"), r.get("recommended_style"))
+            if s > best_s:
+                best, best_s = r, s
+        return (best, True) if best_s > 0 else (rows[0], False)
+    rr = match.rank(rows, pt, PRODUCT_WEIGHTS)
+    return (rr.row, rr.matched)
 
 
-def pick_style(rows, want_style, qtokens, mood_tokens):
-    """Returns (row, matched_bool, override).
+def pick_style(rows, want_style, qtokens, mood_tokens, ranker="new"):
+    """Returns (row, matched_bool, override, ambiguous).
 
     `override` is (default_style, chosen_style) when the user's keywords explicitly
     name a style other than the product's recommended default; in that case the engine
     honors the stated intent and the caller records the swap in "_fallbacks", so an
     explicit style keyword is never silently discarded.
+
+    The explicit-style-override SUBSET rule is ranker-independent (it is intent
+    resolution, not scoring); only the no-default-on-file fall-through differs by ranker.
     """
     if not rows:
-        return None, False, None
+        return None, False, None, False
     want_lc = (want_style or "").lower()
     want_row = next((r for r in rows if r.get("style", "").lower() == want_lc), None)
 
@@ -104,45 +140,62 @@ def pick_style(rows, want_style, qtokens, mood_tokens):
             if name_tokens and name_tokens <= qtokens and len(name_tokens) > named_score:
                 named, named_score = r, len(name_tokens)
         if named is not None:
-            return named, True, (want_row.get("style"), named.get("style"))
-        return want_row, True, None
+            return named, True, (want_row.get("style"), named.get("style")), False
+        return want_row, True, None, False
 
     # No exact default row on file: score by keyword/mood overlap (closest wins).
-    best, best_s = None, 0
     q = qtokens | mood_tokens | _tokens(want_style)
-    for r in rows:
-        s = _overlap(q, r.get("style"), r.get("mood_tags"),
-                     r.get("characteristics"), r.get("best_for"), r.get("summary"))
-        if q & _tokens(r.get("avoid_for")):
-            s -= 2
-        if s > best_s:
-            best, best_s = r, s
-    return (best, True, None) if best_s > 0 else (rows[0], False, None)
+    if ranker == "legacy":
+        best, best_s = None, 0
+        for r in rows:
+            s = _overlap(q, r.get("style"), r.get("mood_tags"),
+                         r.get("characteristics"), r.get("best_for"), r.get("summary"))
+            if q & _tokens(r.get("avoid_for")):
+                s -= 2
+            if s > best_s:
+                best, best_s = r, s
+        return (best, True, None, False) if best_s > 0 else (rows[0], False, None, False)
+
+    def _avoid(r, score):
+        return score - AVOID_PENALTY if (q & _tokens(r.get("avoid_for"))) else score
+    rr = match.rank(rows, q, STYLE_WEIGHTS, adjust=_avoid)
+    return (rr.row, rr.matched, None, rr.ambiguous)
 
 
-def pick_palette(rows, industry, palette_mood, qtokens):
+def pick_palette(rows, industry, palette_mood, qtokens, ranker="new"):
+    """Returns (row, matched_bool, ambiguous)."""
     if not rows:
-        return None, False
+        return None, False, False
     q = _tokens(industry) | _tokens(palette_mood) | qtokens
-    best, best_overlap = None, 0
-    for r in rows:
-        ov = _overlap(q, r.get("industry"), r.get("mood"), r.get("tags"), r.get("name"))
-        score = ov + (1 if r.get("aa_body_text") == "pass" else 0)
-        if best is None or score > best[1]:
-            best = (r, score, ov)
-    return (best[0], best[2] > 0)
+    if ranker == "legacy":
+        best = None
+        for r in rows:
+            ov = _overlap(q, r.get("industry"), r.get("mood"), r.get("tags"), r.get("name"))
+            score = ov + (1 if r.get("aa_body_text") == "pass" else 0)
+            if best is None or score > best[1]:
+                best = (r, score, ov)
+        return (best[0], best[2] > 0, False)
+
+    def _aa(r, score):
+        return score + (AA_BONUS if r.get("aa_body_text") == "pass" else 0.0)
+    rr = match.rank(rows, q, PALETTE_WEIGHTS, adjust=_aa)
+    return (rr.row, rr.matched, rr.ambiguous)
 
 
-def pick_typography(rows, typo_mood, product_type, qtokens):
+def pick_typography(rows, typo_mood, product_type, qtokens, ranker="new"):
+    """Returns (row, matched_bool, ambiguous)."""
     if not rows:
-        return None, False
+        return None, False, False
     q = _tokens(typo_mood) | _tokens(product_type) | qtokens
-    best, best_s = None, 0
-    for r in rows:
-        s = _overlap(q, r.get("mood"), r.get("best_for"), r.get("name"))
-        if s > best_s:
-            best, best_s = r, s
-    return (best, True) if best_s > 0 else (rows[0], False)
+    if ranker == "legacy":
+        best, best_s = None, 0
+        for r in rows:
+            s = _overlap(q, r.get("mood"), r.get("best_for"), r.get("name"))
+            if s > best_s:
+                best, best_s = r, s
+        return (best, True, False) if best_s > 0 else (rows[0], False, False)
+    rr = match.rank(rows, q, TYPO_WEIGHTS)
+    return (rr.row, rr.matched, rr.ambiguous)
 
 
 EFFECT_DEFAULTS = {
@@ -160,6 +213,7 @@ EFFECT_DEFAULTS = {
 def compose(args):
     data_dir = _data_dir(args.data_dir)
     qtokens = _tokens(args.keywords)
+    ranker = _resolve_ranker(getattr(args, "ranker", None))
     fallbacks = []
 
     styles = _load(data_dir, "ui-styles.csv")
@@ -174,7 +228,7 @@ def compose(args):
         if rows is None:
             fallbacks.append(f"{name}.csv missing — used heuristic defaults")
 
-    prod, prod_ok = pick_product(products, args.product_type, args.industry, qtokens)
+    prod, prod_ok = pick_product(products, args.product_type, args.industry, qtokens, ranker)
     if products and not prod_ok:
         fallbacks.append("product-type: no match for inputs — used generic landing defaults")
     want_style = prod.get("recommended_style") if prod else None
@@ -185,19 +239,25 @@ def compose(args):
     anti_from_product = (prod.get("anti_patterns") if prod else "")
 
     mood_tokens = _tokens(palette_mood) | _tokens(typo_mood)
-    style, style_ok, style_override = pick_style(styles, want_style, qtokens, mood_tokens)
-    palette, palette_ok = pick_palette(palettes, args.industry, palette_mood, qtokens)
-    typo, typo_ok = pick_typography(fonts, typo_mood, args.product_type, qtokens)
+    style, style_ok, style_override, style_amb = pick_style(styles, want_style, qtokens, mood_tokens, ranker)
+    palette, palette_ok, palette_amb = pick_palette(palettes, args.industry, palette_mood, qtokens, ranker)
+    typo, typo_ok, typo_amb = pick_typography(fonts, typo_mood, args.product_type, qtokens, ranker)
 
     if styles and not style_ok:
         fallbacks.append("style: no strong match — returned closest available (refine keywords to improve)")
     elif style_override:
         fallbacks.append("style: keyword '%s' overrode the product default '%s' (drop the keyword to keep the default)"
                          % (style_override[1], style_override[0]))
+    elif style_amb:
+        fallbacks.append("style: top matches were close — returned the highest-ranked (refine keywords to disambiguate)")
     if palettes and not palette_ok:
         fallbacks.append("palette: no strong match — returned closest available")
+    elif palette_amb:
+        fallbacks.append("palette: top matches were close — returned the highest-ranked (refine keywords to disambiguate)")
     if fonts and not typo_ok:
         fallbacks.append("typography: no strong match — returned closest available")
+    elif typo_amb:
+        fallbacks.append("typography: top matches were close — returned the highest-ranked (refine keywords to disambiguate)")
 
     style_name = style.get("style") if style else (want_style or "minimal")
     effects = EFFECT_DEFAULTS.get(style_name, EFFECT_DEFAULTS["_default"])
@@ -234,6 +294,10 @@ def compose(args):
             "bg": palette.get("bg"), "surface": palette.get("surface"),
             "text": palette.get("text"), "success": palette.get("success"),
             "warning": palette.get("warning"), "error": palette.get("error"),
+            # modern semantic slots (additive; present when the palette CSV supplies them)
+            "card": palette.get("card"), "muted": palette.get("muted"),
+            "border": palette.get("border"), "ring": palette.get("ring"),
+            "destructive": palette.get("destructive"),
             "text_on_bg_contrast": palette.get("text_on_bg_contrast"),
             "on_primary": palette.get("on_primary"),
             "aa_body_text": palette.get("aa_body_text"),
@@ -266,6 +330,8 @@ def to_human(d):
         out.append(f"  primary {pal['primary']}  secondary {pal['secondary']}  accent {pal['accent']}")
         out.append(f"  bg {pal['bg']}  surface {pal['surface']}  text {pal['text']}  (text/bg {pal['text_on_bg_contrast']}, AA {pal['aa_body_text']})")
         out.append(f"  on-primary text {pal.get('on_primary')}  |  success {pal['success']}  warning {pal['warning']}  error {pal['error']}")
+        if pal.get("card"):
+            out.append(f"  card {pal['card']}  muted {pal['muted']}  border {pal['border']}  ring {pal['ring']}  destructive {pal['destructive']}")
     t = d["typography"]
     if t:
         out.append("Type:       " + f"{t['pairing']} — {t['heading_font']} {t['heading_weight']} / {t['body_font']} {t['body_weight']}")
@@ -293,6 +359,9 @@ def main():
     ap.add_argument("--keywords", default="", help="free-text style keywords, comma separated")
     ap.add_argument("--data-dir", default=None, help="override path to data/ dir")
     ap.add_argument("--human", action="store_true", help="print ASCII summary instead of JSON")
+    ap.add_argument("--ranker", choices=RANKERS, default=None,
+                    help="scoring ranker: 'new' (default, weighted-IDF) or 'legacy' "
+                         "(raw token-overlap revert path); also via DPS_RANKER env var")
     args = ap.parse_args()
     result = compose(args)
     print(to_human(result) if args.human else json.dumps(result, indent=2))

@@ -18,8 +18,13 @@ import os
 import re
 import sys
 from urllib.parse import urlparse
-from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
+
+# --- shared SSRF guard (local sibling in scripts/workflow) -------------------
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "workflow"))
+from net_safety import (  # noqa: E402
+    safe_open, validate_url, UrlValidationError, SafeFetchError,
+)
 
 UA = "Mozilla/5.0 (compatible; designer-pro-seo-drift/1.0)"
 
@@ -38,11 +43,26 @@ def _find(pat, html):
 
 
 def fetch(url, timeout=10):
+    """SSRF-guarded GET via the shared net_safety.safe_open (validates the URL and every
+    redirect hop before fetching). Never raises; returns (text, None) or (None, error)."""
     try:
-        with urlopen(Request(url, headers={"User-Agent": UA}), timeout=timeout) as r:
-            return r.read(2_000_000).decode("utf-8", "replace"), None
-    except (URLError, HTTPError, ValueError, TimeoutError) as e:
+        resp, _chain = safe_open(url, timeout=timeout, headers={"User-Agent": UA})
+    except (UrlValidationError, SafeFetchError) as e:
         return None, str(e)
+    except (URLError, HTTPError, ValueError, TimeoutError, OSError) as e:
+        return None, str(e)
+    try:
+        status = getattr(resp, "status", None) or getattr(resp, "code", None)
+        if status is not None and status >= 400:
+            return None, "HTTP %s" % status
+        return resp.read(2_000_000).decode("utf-8", "replace"), None
+    except (URLError, HTTPError, ValueError, TimeoutError, OSError) as e:
+        return None, str(e)
+    finally:
+        try:
+            resp.close()
+        except Exception:
+            pass
 
 
 def capture(html, url=None):
@@ -86,18 +106,28 @@ def diff(baseline, current):
                         else f"{len(changes)} element(s) changed since baseline")}
 
 
-def _get_html(args):
-    if args.file:
+def load_html(file=None, url=None, no_network=False):
+    """Public, SSRF-guarded HTML loader shared by the drift baseline/compare engines.
+
+    Reads a local `--file`, or fetches `--url` through `fetch()` (which routes the
+    request via the shared `net_safety.safe_open` guard — never a raw urlopen, and
+    every redirect hop is re-validated). Returns `(html, error)`; never raises.
+    drift_tools stays the one canonical element capturer + fetcher for the family."""
+    if file:
         try:
-            with open(args.file, encoding="utf-8", errors="replace") as f:
+            with open(file, encoding="utf-8", errors="replace") as f:
                 return f.read(), None
         except OSError as e:
-            return None, "could not read --file %s: %s" % (args.file, e)
-    if args.url and not args.no_network:
-        if urlparse(args.url).scheme not in ("http", "https"):
+            return None, "could not read --file %s: %s" % (file, e)
+    if url and not no_network:
+        if urlparse(url).scheme not in ("http", "https"):
             return None, "url must be http(s)"
-        return fetch(args.url)
+        return fetch(url)
     return None, "provide --file or a reachable --url"
+
+
+def _get_html(args):
+    return load_html(args.file, args.url, args.no_network)
 
 
 def main():

@@ -1,6 +1,6 @@
 ---
 name: seo-backlinks
-description: Backlink profile analysis — referring domains, anchor distribution, toxic-link flags, competitor gap, link-building targets. Uses a connected link-data MCP (DataForSEO / Moz / Bing) for full metrics when present; otherwise builds a qualitative profile via web-search mention/linking-domain discovery (the free path is qualitative — exact counts, authority, and toxic-link confirmation need a connected provider). Trigger when the user says "backlinks", "link profile", "referring domains", "anchor text", "toxic links", "link gap", "link building", "disavow", "backlink audit".
+description: Backlink profile analysis — referring domains, anchor-text distribution, toxic-link flags, competitor link gap, and link-building targets. Uses a connected link-data MCP (DataForSEO, Moz, or Bing) for full metrics and authority scores when present; otherwise builds a qualitative profile from web-search mention and linking-domain discovery (no exact counts, authority, or confirmed toxicity without a provider). Trigger when the user says "backlinks", "link profile", "referring domains", "anchor text", "toxic links", "link gap", "link building", "disavow", or "backlink audit".
 ---
 
 # seo-backlinks

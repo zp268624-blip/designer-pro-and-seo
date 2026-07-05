@@ -1,6 +1,6 @@
 ---
 name: route-gemini-context
-description: Long-context delegation — hands large multi-file or whole-repo work to Gemini's large context window for architecture maps, refactor-impact analysis, and multi-document synthesis. Trigger when the user says "scan the whole repo", "long context", "all the files", "synthesize across", "gemini analysis", "architecture map", "trace dependencies", "what changes if I refactor X", or when a task needs more context than Claude's window.
+description: Delegates large multi-file or whole-repo work to Gemini for architecture maps, refactor-impact analysis, and multi-document synthesis. Uses Gemini's large context window when the gemini CLI is connected; otherwise runs a scoped Claude pass over the most relevant files (narrower, lower-fidelity). Trigger when the user says "scan the whole repo", "long context", "all the files", "synthesize across these files", "gemini analysis", "map the architecture", "trace dependencies", or "what changes if I refactor X".
 ---
 
 # route-gemini-context
@@ -17,9 +17,9 @@ integrates.
 
 ## Triggers
 
-- "scan the whole repo" / "long context" / "all the files" / "synthesize across"
-- "gemini analysis" / "architecture map"
-- "trace dependencies" / "refactor impact" / "compare these schemas/docs"
+- "scan the whole repo" / "long context" / "all the files" / "synthesize across these files"
+- "gemini analysis" / "map the architecture"
+- "trace dependencies" / "what changes if I refactor X"
 
 ## Inputs
 
@@ -49,8 +49,9 @@ integrates.
 
 ## Dependencies
 
-- The `gemini` CLI installed (or the adjacent `cc-gemini-plugin`). Degrades to a
-  scoped Claude pass when absent.
+- `gemini` CLI, or the adjacent `cc-gemini-plugin` (optional — adds a context
+  window far larger than Claude's for whole-repo passes; free path: a scoped Claude
+  pass over the most relevant files, narrower but honest about the limit).
 
 ## Notes
 

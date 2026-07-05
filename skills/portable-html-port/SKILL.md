@@ -1,6 +1,6 @@
 ---
 name: portable-html-port
-description: Port a built site or page into a single-file portable HTML bundle that drops cleanly into any CMS or page builder with a "paste HTML" surface — WordPress (Elementor / Gutenberg / custom theme), GoHighLevel (Custom Code blocks), Webflow (custom code embed), Wix (HTML iframe), Framer (code embed), Squarespace, Carrd, or anything else. Trigger when the user says "port to wordpress", "put this in ghl", "single-file html", "make this embed-ready", "portable html", or needs to deliver a build inside an existing CMS rather than as a standalone Vercel/Netlify deploy.
+description: Port a built site or page into a single self-contained HTML file — CSS and JS inlined, small images base64-embedded, large ones flagged for CDN, source maps stripped — that pastes into any CMS or page-builder custom-HTML surface (WordPress, GoHighLevel, Webflow, Wix, Framer, Squarespace, Carrd, or generic) with no per-platform edits. Trigger when the user says "port to wordpress", "put this in ghl", "single-file html", "portable html", "make this embed-ready", "embed in webflow", or "wp port".
 ---
 
 # portable-html-port
@@ -19,9 +19,10 @@ base64-embedded, large ones are flagged for CDN hosting, and dev artifacts
 ## Triggers
 
 - "port to wordpress" / "wp port"
-- "put this in ghl" / "go high level" / "ghl port"
-- "single-file html" / "portable html" / "make this embed-ready"
-- "embed in webflow / wix / framer / squarespace"
+- "put this in ghl"
+- "single-file html" / "portable html"
+- "make this embed-ready"
+- "embed in webflow"
 
 ## Inputs
 
@@ -57,7 +58,7 @@ base64-embedded, large ones are flagged for CDN hosting, and dev artifacts
 ## Dependencies
 
 - `scripts/workflow/portable_html.py` (required) — Python 3.10+, standard library only
-- Optional: a browser (or Playwright) to verify the standalone render
+- Browser or Playwright (optional — adds an automated standalone-render check; free path: open the output file and spot-check manually)
 
 ## Notes
 
@@ -70,4 +71,4 @@ guidance per target):
 - **Framer / Squarespace** — full HTML+CSS+JS embed support
 - **Carrd** — Embed element (Code type); requires a Carrd Pro plan
 
-A worked example lives in `references/examples/portable-html/`.
+Sample source input lives in `references/examples/portable-html/src/`.

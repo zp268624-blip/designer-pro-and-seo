@@ -1,6 +1,6 @@
 ---
 name: seo-image-gen
-description: Generate SEO-ready images (OG/social preview, blog hero, product, infographic, favicon) at correct dimensions with SEO-aware naming and alt text WHEN an image generator is available — the Gemini CLI or an image MCP/provider key; otherwise deliver production-ready prompts + exact specs to generate elsewhere (there is no built-in renderer, so the default with no generator is prompts+specs, not images). Trigger when the user says "generate image", "og image", "social preview", "hero image", "product photo", "infographic", "favicon", or "create a visual".
+description: Generate SEO-ready images — OG/social previews, blog heroes, product shots, infographics, and favicons — at correct dimensions with SEO-aware filenames and alt text. Uses the Gemini CLI or a connected image-gen MCP/provider key when available; otherwise delivers production-ready prompts and exact specs to render elsewhere (there is no built-in renderer). Trigger when the user says "generate image", "og image", "social preview", "hero image", "product photo", "infographic", "favicon", or "create a visual".
 ---
 
 # seo-image-gen
@@ -38,7 +38,7 @@ its own; it never just fails.
    so generated images match the brand.
 2. **Compose the generation prompt** — subject + style + palette + composition, with
    negative prompts to avoid unwanted text artifacts.
-3. **Detect generators.** Run `scripts/workflow/capability_probe.py` and check for a
+3. **Detect generators.** Run `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/workflow/capability_probe.py"` and check for a
    connected image-gen MCP. Route per the cascade below.
 4. **Generate or hand off.** If a generator is available, render at the preset
    dimensions into the user's workspace. If none is, output the prompt + exact specs

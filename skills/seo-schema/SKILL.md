@@ -1,6 +1,6 @@
 ---
 name: seo-schema
-description: Detect, validate, and generate Schema.org structured data in JSON-LD. Validates required properties per Google's rich-results rules and @id cross-references across pages (schema graph linking). Trigger when the user says "schema", "structured data", "rich results", "JSON-LD", "markup", "schema validation", or wants rich-results eligibility.
+description: Detect, validate, and generate Schema.org structured data as JSON-LD. A bundled validator checks required and recommended properties against Google's 2026 rich-results rules and flags deprecated types (e.g. FAQPage); a separate cross-page pass reviews @id references so the site reads as one entity graph. Trigger when the user says "schema", "structured data", "rich results", "JSON-LD", "schema markup", "validate schema", "schema graph", or "rich results eligibility".
 ---
 
 # seo-schema

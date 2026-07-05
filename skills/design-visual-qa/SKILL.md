@@ -1,6 +1,6 @@
 ---
 name: design-visual-qa
-description: Capture visual baselines of a built site at multiple viewports and detect visual regressions against prior baselines, using the bundled (free) Playwright extension to render and Claude's vision to compare; an exact pixel-diff CLI is used for precise deltas when available. Without a browser, delivers a structured manual visual-QA checklist and the one step to enable rendering. Trigger when the user says "visual qa", "visual regression", "screenshot diff", "did anything change visually", "pixel diff", "compare against baseline", or before/after a refactor where the visual output must not change.
+description: Capture full-page screenshot baselines at multiple viewports and browsers, then diff later runs against them to catch unintended rendering changes. Renders with the bundled (free) Playwright extension and compares with Claude's vision, adding an exact pixel-diff CLI for precise deltas when one is installed. Without a browser, delivers a manual visual-QA checklist and the one step to enable rendering. Trigger when the user says "visual qa", "visual regression", "screenshot diff", "pixel diff", "did anything change visually", "compare against baseline", or "before and after screenshots".
 ---
 
 # design-visual-qa
@@ -40,9 +40,12 @@ updates, and cross-browser drift.
 
 ## Steps
 
-1. **Detect the renderer.** Confirm the Playwright MCP is connected; run
-   `scripts/workflow/capability_probe.py` to see if an exact differ (`odiff`/
-   `pixelmatch` via `npx`) is available.
+1. **Detect the renderer.** Confirm the Playwright MCP is connected, then run
+   the capability probe to see if an exact differ (`odiff`/`pixelmatch` via `npx`)
+   is available:
+   ```
+   python3 "${CLAUDE_PLUGIN_ROOT}/scripts/workflow/capability_probe.py"    # use `py` on Windows if python3 is absent; in PowerShell the variable is $env:CLAUDE_PLUGIN_ROOT
+   ```
 2. **Capture.** For each (URL, viewport, browser): load, wait for network idle +
    fonts + animations settled, then full-page screenshot.
 3. **Baseline vs diff.**
@@ -51,30 +54,35 @@ updates, and cross-browser drift.
      + highlighted diff image. Otherwise → Claude-vision comparison reporting the
      specific regions/elements that changed and whether each looks intentional.
 4. **Aggregate** which pages/viewports drifted and by how much (or how materially).
-5. **Report which tier ran** and, if no browser was available, the one step to enable
-   it (connect the bundled Playwright extension).
-
-## Capability routing
-
-This skill follows the plugin's capability-tier cascade
-(`references/CAPABILITY-TIERS.md`):
-
-1. **Tier 1/2 — Playwright (bundled, free) + comparison.** Render with Playwright;
-   compare with an exact pixel differ if installed, else Claude's vision. This is the
-   product.
-2. **Tier 4 — guided.** No browser available → deliver a structured manual visual-QA
-   checklist (what to eyeball per viewport) and the one step to enable Playwright
-   (`extensions/playwright/`). Route static structural/a11y checks to
-   `design-accessibility`.
-
-Always state which tier ran and how to enable rendering if it didn't.
+   Grade each change against the four axes (hierarchy, rhythm, contrast, restraint)
+   and the severity ladder in `references/design-visual-qa/visual-qa-rubric.md` — a
+   large delta can be a deliberate improvement, while a tiny delta that drops text
+   below AA or hides a focus ring is a critical regression.
+5. **Report which tier ran** (per the plugin's capability-tier cascade,
+   `references/CAPABILITY-TIERS.md`: Tier 1/2 = Playwright render + exact-differ-or-
+   Claude-vision compare; Tier 4 = no browser, guided checklist) and, if no browser
+   was available, the one step to enable it (connect the bundled Playwright extension).
 
 ## Outputs
 
-Written into the user's project workspace:
-- `visual-qa/baselines/<page>-<viewport>-<browser>.png` — baselines
-- `visual-qa/diffs/<run-date>/...` — diff images (when an exact differ ran)
-- `visual-qa/report-<date>.md` — summary (drifted pages/viewports + severity)
+| Output | What it contains | Format | Quality bar (how it is scored) |
+|---|---|---|---|
+| Baselines | `visual-qa/baselines/<page>-<viewport>-<browser>.png` | PNG per (page, viewport, browser) | Captured only after network idle + fonts + animations settle, so a baseline is stable, not mid-render |
+| Diff images | `visual-qa/diffs/<run-date>/...` | PNG (when an exact differ ran) | Highlights the changed regions; pixel-delta % reported when a differ is present |
+| QA report | `visual-qa/report-<date>.md` — drifted pages/viewports + per-change verdict + tier | md, grouped Critical/High/Advisory | Every change classified improvement / neutral / regression against the four axes; states which tier ran; no fabricated pixel number when only Claude-vision ran |
+
+Filed to: the user's project workspace. A change is judged by the rubric in
+`references/design-visual-qa/visual-qa-rubric.md`, not by pixel delta alone.
+
+## Error Handling
+
+| Condition | Detection | Behavior (degrade, never fail) | User-facing message |
+|---|---|---|---|
+| No browser / Playwright absent | MCP not connected (capability probe) | deliver the Tier-4 manual visual-QA checklist + the one step to enable the free renderer | "No renderer — here's a manual visual-QA checklist. Connect the bundled Playwright extension to capture pixels." |
+| No exact pixel differ | `odiff`/`pixelmatch` not found by the probe | compare with Claude's vision; report changed regions qualitatively | "No exact differ — used vision comparison; add odiff/pixelmatch for pixel-delta %." |
+| No baseline yet | `capture`/`diff` target has no stored baseline | capture it as the new baseline instead of erroring | "No baseline for <page> — captured one; re-run after your change to diff." |
+| Page never settles | network idle / fonts / animation wait times out | capture at the timeout and flag the shot as possibly unsettled | "<page> didn't settle — captured at timeout; treat its diff as advisory." |
+| Bad / unreachable target | URL fails validation or won't load | report the target error; capture nothing for it | "<url> is unreachable / invalid — skipped it; other targets captured." |
 
 ## Dependencies
 

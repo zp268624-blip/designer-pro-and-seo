@@ -1,6 +1,6 @@
 ---
 name: seo-hreflang
-description: International SEO — hreflang validation and generation across HTML, HTTP header, and sitemap implementations. Validates language/region codes, self-reference, x-default, and flags return-link reciprocity to verify. Trigger when the user says "hreflang", "i18n SEO", "international SEO", "multi-language", "multi-region", "language tags", or "regional SEO".
+description: Validates and generates hreflang annotations for international SEO. Checks language/region codes, self-reference, x-default, duplicates, and absolute URLs, and flags return-link reciprocity to verify; generates HTML alternate link tags and identifies HTTP Link header and XML sitemap placement. Trigger when the user says "hreflang", "i18n SEO", "international SEO", "multi-language", "multi-region", "language tags", or "regional SEO".
 ---
 
 # seo-hreflang

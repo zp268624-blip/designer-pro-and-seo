@@ -54,6 +54,36 @@ Bing/Yandex/AI engines.
 5. **Render** per-dimension findings grouped Critical / High / Medium / Info, each
    with a specific fix.
 
+## Capability routing
+
+This skill follows the plugin's capability-tier cascade
+(`references/CAPABILITY-TIERS.md`) and always returns a usable audit:
+
+1. **Tier 1 — Google PSI / CrUX (free key, via `seo-google`).** When a Google key
+   is set, pull real *field* Core Web Vitals (LCP/CLS/INP) to harden the CWV
+   dimension; a connected Firecrawl MCP can additionally JS-render shells for the
+   "visible without JS?" check.
+2. **Tier 2 — built-in (the default).** Otherwise `tech_audit.py` runs the full
+   9-category lab audit offline (`--file` / `--no-network`) and emits the CWV
+   targets — a complete, prioritized technical report on its own, no key, no
+   network. This is the product.
+3. **Tier 4 — guided.** If nothing is connected, deliver the lab audit and name the
+   field-CWV gap, pointing to a free Google PSI/CrUX key via `seo-google`.
+
+```capability-routing
+capability:   cwv-field
+tier1:        Google PSI / CrUX (free key) via seo-google
+tier1_signal: CRUX_API_KEY | GOOGLE_API_KEY
+tier2:        tech_audit.py (9-category lab audit + LCP<2.5 / CLS<0.1 / INP<200 targets, no key)
+tier2_yields: prioritized per-dimension technical findings with concrete fixes, zero spend
+tier3:        none
+tier3_signal: none
+tier4:        manual technical-SEO checklist; add a free Google PSI/CrUX key via seo-google for field CWV
+needs_tier1:  field CWV (LCP/CLS/INP from CrUX), real Lighthouse performance score
+```
+
+Always end by stating which tier ran and what field data a higher tier would add.
+
 ## Outputs
 
 - Per-dimension findings with prioritized fixes (script JSON or `--human` text)

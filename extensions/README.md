@@ -5,7 +5,7 @@ Optional MCP server wirings. The plugin works without any of these, but several 
 ## Available extensions
 
 - `firecrawl/` — Firecrawl MCP for crawling, scraping, JS rendering (used by `seo-firecrawl`, `seo-audit`, `design-research`)
-- `dataforseo/` — DataForSEO MCP for premium SERP / keyword / backlink / AI-visibility data (used by `seo-dataforseo`, `seo-backlinks`, `seo-cluster`, `seo-ecommerce`, `seo-local-unified`, `seo-content-brief`)
+- `dataforseo/` — DataForSEO MCP for premium SERP / keyword / backlink / AI-visibility data (used by `seo-dataforseo`, `seo-backlinks`, `seo-cluster`, `seo-content-brief`, `seo-ecommerce`, `seo-geo`, `seo-image-audit`, `seo-local-unified`, `seo-page`, `seo-sxo`)
 - `nanobanana/` — Gemini-based image generation (used by `seo-image-gen`; the
   recommended path is the Gemini CLI — see that folder's README)
 - `playwright/` — Microsoft's Playwright MCP for browser automation (used by `design-accessibility`, `design-visual-qa`, `design-cro`, `qa-gate`, `html-extract`, `parallel-build`, `portable-html-port`)

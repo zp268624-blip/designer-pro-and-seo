@@ -1,0 +1,79 @@
+# Schema.org Catalog — Types the Plugin Emits & Validates
+
+Shared reference for the structured-data skills (`seo-schema`, `seo-page`,
+`seo-local-unified`, `seo-ecommerce`, `seo-audit`). It catalogs the common
+Schema.org types the plugin generates or checks, with the properties that matter
+for rich results. The generator/validator lives in
+`scripts/seo/schema_gen.py`; this file is the vocabulary reference it implements
+against. JSON-LD is the preferred serialization. Knowledge, not steps.
+
+## How to read this catalog
+
+- **Required** = omit it and the markup is invalid / ineligible for the rich
+  result.
+- **Recommended** = strongly improves eligibility or display; include when the
+  data exists.
+- Properties are referenced from the public Schema.org vocabulary and Google's
+  public rich-result guidance; their text is not redistributed here.
+
+## Core entity & navigation types
+
+| Type | Required | Recommended |
+|---|---|---|
+| **Organization** | `name` | `url`, `logo`, `sameAs`, `contactPoint` |
+| **WebSite** | `name`, `url` | `potentialAction` (SearchAction for sitelinks search box) |
+| **WebPage** | `name` | `url`, `description`, `breadcrumb`, `primaryImageOfPage` |
+| **BreadcrumbList** | `itemListElement` (ordered `ListItem`s with `position`, `name`, `item`) | — |
+
+## Content types
+
+| Type | Required | Recommended |
+|---|---|---|
+| **Article / BlogPosting / NewsArticle** | `headline` | `image`, `datePublished`, `dateModified`, `author` (Person/Organization), `publisher` |
+| **FAQPage** | `mainEntity` → `Question` each with an `acceptedAnswer` | — (note the reduced rich-result eligibility below) |
+| **HowTo** | `name`, `step` (`HowToStep`s) | `image`, `totalTime`, `supply`, `tool` |
+| **VideoObject** | `name`, `thumbnailUrl`, `uploadDate` | `description`, `duration`, `contentUrl` / `embedUrl` |
+
+## Commerce types
+
+| Type | Required | Recommended |
+|---|---|---|
+| **Product** | `name` | `image`, `description`, `brand`, `sku`, `offers`, `aggregateRating`, `review` |
+| **Offer** | `price`, `priceCurrency` | `availability`, `priceValidUntil`, `url`, `itemCondition` |
+| **AggregateRating** | `ratingValue`, `reviewCount` (or `ratingCount`) | `bestRating`, `worstRating` |
+| **Review** | `reviewRating` (→ `Rating.ratingValue`), `author` | `datePublished`, `reviewBody` |
+
+## Local & people types
+
+| Type | Required | Recommended |
+|---|---|---|
+| **LocalBusiness** (and subtypes: Restaurant, Dentist, Plumber, …) | `name`, `address` (`PostalAddress`) | `telephone`, `geo`, `openingHoursSpecification`, `priceRange`, `url`, `image` |
+| **PostalAddress** | `streetAddress`, `addressLocality`, `addressCountry` | `addressRegion`, `postalCode` |
+| **Event** | `name`, `startDate`, `location` | `endDate`, `offers`, `performer`, `eventStatus`, `eventAttendanceMode` |
+| **Person** | `name` | `jobTitle`, `worksFor`, `sameAs`, `url`, `image` |
+
+## Cross-cutting validity rules
+
+- **Match the visible page.** Marked-up values must reflect content a user can
+  actually see; invented or hidden review/price/rating data is a violation.
+- **Use the most specific type** that fits (e.g. `Dentist` over `LocalBusiness`)
+  to inherit its expected properties.
+- **One `@graph` per page** is the clean way to express multiple linked entities;
+  share nodes via `@id` references instead of duplicating them.
+- **Ratings need real aggregate data.** `AggregateRating` without a genuine
+  `reviewCount` is invalid and risks a manual action.
+
+## FAQPage eligibility note (kept current)
+
+Rich-result display for `FAQPage` was narrowed to a small set of authoritative
+government and health sites; for most sites valid FAQ markup no longer produces
+the expanded SERP treatment. The markup remains valid and machine-readable for
+non-Google consumers and AI answer engines, so the plugin still emits it where
+genuinely useful but does not promise the rich result.
+
+## Free-path note
+
+Generation and validation are fully offline and deterministic: the plugin builds
+JSON-LD from supplied fields and checks required/recommended coverage against
+this catalog without any external API. A connector (e.g. live rich-results
+testing) only deepens the verdict; the offline structural check is the product.

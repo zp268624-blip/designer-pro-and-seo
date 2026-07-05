@@ -1,6 +1,6 @@
 ---
 name: seo-dataforseo
-description: Premium SERP / keyword / backlink / AI-visibility data via the DataForSEO MCP when connected (volume, difficulty, multi-engine SERP, image SERP, LLM-mention tracking); otherwise a qualitative SERP and keyword read from built-in web search, clearly labeled lower-fidelity. Trigger when the user says "dataforseo", "live SERP", "keyword volume", "keyword difficulty", "backlink data", "competitor data", "AI visibility check", "LLM mentions", "image SERP", "real search data".
+description: Pulls live SERP, keyword, backlink, and AI-visibility data from the DataForSEO MCP when connected — search volume, keyword difficulty, multi-engine and image SERP, referring domains, and LLM-mention tracking; otherwise reads the current SERP and competitor set from built-in web search, clearly labeled as lower-fidelity with the metrics that need the MCP named. Trigger when the user says "dataforseo", "live SERP", "keyword volume", "keyword difficulty", "backlink data", "AI-visibility data", "image SERP", or "real search data".
 ---
 
 # seo-dataforseo
@@ -23,7 +23,7 @@ exact metrics that require the MCP named.
 - "live SERP" / "real search data"
 - "keyword volume" / "keyword difficulty" / "keyword research"
 - "backlink data" / "competitor data"
-- "AI visibility" / "LLM mentions" / "ChatGPT mentions"
+- "AI visibility check" / "LLM mentions" / "ChatGPT mentions"
 - "image SERP" / "google images rankings"
 
 ## Inputs

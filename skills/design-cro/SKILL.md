@@ -1,6 +1,6 @@
 ---
 name: design-cro
-description: Run a heuristic conversion-rate-optimization review on a landing page or funnel — CTA hierarchy, form friction, trust signals, copy clarity, above-fold weight, decision fatigue. Trigger when the user says "cro", "conversion review", "why isn't this converting", "landing page review", "funnel review", "improve conversions", or before/after a landing-page launch.
+description: Run a heuristic conversion-rate-optimization review of a landing or funnel page — CTA hierarchy, above-fold weight, form friction, trust-signal placement, copy clarity, and decision fatigue — scoring each finding by impact over effort. Uses Playwright for in-browser thumb-zone and interaction checks when connected; otherwise reviews the fetched HTML and flags those as manual checks. Trigger when the user says "cro", "conversion review", "why isn't this converting", "landing page review", "funnel review", "improve conversions", or "checkout friction review".
 ---
 
 # design-cro
@@ -25,6 +25,7 @@ decision fatigue, and mobile reality.
 - "cro" / "conversion review" / "improve conversions"
 - "why isn't this converting"
 - "landing page review" / "funnel review"
+- "checkout friction review"
 
 ## Inputs
 
@@ -54,7 +55,8 @@ decision fatigue, and mobile reality.
 
 - None required (heuristic review of provided HTML/URL); `data/ux-rules.csv` for the
   conversion/CTA rule set
-- Optional: Playwright (in-browser thumb-zone/interaction); `copywriting` (copy fixes)
+- Playwright (optional — adds in-browser thumb-zone/interaction checks; free path: manual thumb-zone inspection of the fetched HTML, noted in the report)
+- `copywriting` (optional — drafts copy fixes; free path: inline copy recommendation per finding)
 
 ## Notes
 

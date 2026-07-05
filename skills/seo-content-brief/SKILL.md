@@ -1,6 +1,6 @@
 ---
 name: seo-content-brief
-description: Generate competitive SEO content briefs with per-section structure, word-count guidance, required entities, internal links, and schema recommendations. Supports new-page and improve-existing-page briefs. Trigger when the user says "content brief", "write a brief", "content outline", "blog brief", "service page brief", "brief for", "writing brief", or "outline for".
+description: Generate competitive SEO content briefs — per-section heading structure, word-count guidance anchored on top-ranking pages, required entities, internal and external links, schema recommendations, and GEO citability guidance. Covers new-page and improve-existing-page briefs. Uses DataForSEO to auto-fetch the SERP when connected; otherwise analyzes the competitor URLs you provide. Trigger when the user says "content brief", "write a brief", "content outline", "blog brief", "service page brief", "brief for", "writing brief", or "outline for".
 ---
 
 # seo-content-brief
@@ -53,10 +53,12 @@ auto-SERP-fetch is the optional DataForSEO path.
 ## Dependencies
 
 - None required (free path uses provided competitor URLs)
-- Optional: DataForSEO (auto-SERP), `seo-cluster` (related keywords), `seo-schema`
-  (schema), `content-draft` (executes the brief)
+- Optional: DataForSEO (auto-SERP), `seo-schema` (schema), `content-draft`
+  (executes the brief)
 
 ## Notes
 
 Per-section word counts grounded in real competitor scoring beat generic minimums.
+
+Related: `seo-cluster` is the upstream orchestrator that dispatches per-page briefs to this skill.
 Pairs with `content-draft` (writes it) and `seo-content` (audits the result).

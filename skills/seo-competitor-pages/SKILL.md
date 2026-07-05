@@ -1,6 +1,6 @@
 ---
 name: seo-competitor-pages
-description: Generate SEO-optimized competitor comparison and alternatives pages — "X vs Y" layouts, "alternatives to X" pages, feature matrices, schema, and conversion patterns. Trigger when the user says "comparison page", "vs page", "alternatives page", "competitor comparison", "X vs Y", "versus", "compare competitors", or "alternative to".
+description: Generate SEO-optimized competitor comparison and alternatives pages — "X vs Y" layouts, "alternatives to X" pages, feature matrices, schema, and conversion patterns. Trigger when the user says "comparison page", "vs page", "alternatives page", "X vs Y", "versus", or "alternative to".
 ---
 
 # seo-competitor-pages

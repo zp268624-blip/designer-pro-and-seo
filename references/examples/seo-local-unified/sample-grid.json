@@ -1,0 +1,10 @@
+{
+  "business": "Cedar Creek Plumbing",
+  "keyword": "emergency plumber",
+  "depth": 20,
+  "points": [
+    {"lat": 40.2400, "lng": -111.6600, "rank": 1},
+    {"lat": 40.2500, "lng": -111.6600, "rank": 4},
+    {"lat": 40.2600, "lng": -111.6600, "rank": null}
+  ]
+}

@@ -1,6 +1,6 @@
 ---
 name: blast-prompt
-description: Generate a complete build brief using the BLAST framework — Blueprint, Link, Architect, Stylize, Trigger. Trigger when the user says "blast prompt", "build brief", "structured build prompt", "give me a complete build prompt", or is about to hand off a site/app build to an AI agent and wants the brief structured.
+description: Generate a complete build brief in BLAST format — Blueprint, Link, Architect, Stylize, Trigger — so a build agent can one-shot a high-quality build. Pulls the Stylize section from a saved or freshly generated design system. Trigger when the user says "blast prompt", "build brief", "structured build prompt", "complete build prompt", "brief for the build agent", or "prompt I can paste into Claude or Cursor".
 ---
 
 # blast-prompt
@@ -23,9 +23,9 @@ with a required-fields checklist so nothing is forgotten before launch:
 ## Triggers
 
 - "blast prompt" / "build brief"
-- "structured build prompt"
-- "complete prompt for the build agent"
-- "give me a brief I can paste into Claude / Cursor"
+- "structured build prompt" / "complete build prompt"
+- "brief for the build agent"
+- "prompt I can paste into Claude or Cursor"
 
 ## Inputs
 
@@ -39,7 +39,7 @@ with a required-fields checklist so nothing is forgotten before launch:
 
 1. **Load the template** `templates/blast-template.md`.
 2. **Walk each section** with the user, filling required fields. Auto-fill from
-   project context where possible (CLAUDE.md, an existing design system / `MASTER.md`).
+   project context where possible (CLAUDE.md, an existing design system / `design-system/MASTER.md`).
 3. **Pull the Stylize section** from a `design-system-gen` result (run it first if
    no design system exists). Map palette hex, typography, and effects into the slots.
 4. **Validate completeness.** Run the template's completeness gate — every required
@@ -60,7 +60,7 @@ with a required-fields checklist so nothing is forgotten before launch:
 ## Dependencies
 
 - `templates/blast-template.md` (required)
-- `design-system-gen` — for the Stylize section
+- `design-system-gen` (optional — adds an on-brand Stylize section: palette hex, typography, effects, anti-patterns; free path: fill Stylize from the project's saved design system (`design-system/MASTER.md`) or from user-supplied tokens)
 
 ## Notes
 

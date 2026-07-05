@@ -1,0 +1,1660 @@
+{
+  "agency-portfolio|bold-premium": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "bold, premium",
+    "palette": "creative-bold-magenta",
+    "pattern": "editorial",
+    "product_type": "agency-portfolio",
+    "style": "swiss-grid",
+    "typography": "tech-precise"
+  },
+  "agency-portfolio|default": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "",
+    "palette": "creative-bold-magenta",
+    "pattern": "editorial",
+    "product_type": "agency-portfolio",
+    "style": "swiss-grid",
+    "typography": "tech-precise"
+  },
+  "agency-portfolio|lone-clean": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "clean",
+    "palette": "creative-bold-magenta",
+    "pattern": "editorial",
+    "product_type": "agency-portfolio",
+    "style": "swiss-grid",
+    "typography": "modern-neutral"
+  },
+  "agency-portfolio|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'swiss-grid' (drop the keyword to keep the default)"
+    ],
+    "industry": "creative",
+    "keywords": "modern, minimal",
+    "palette": "creative-bold-magenta",
+    "pattern": "editorial",
+    "product_type": "agency-portfolio",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "agency-portfolio|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'swiss-grid' (drop the keyword to keep the default)"
+    ],
+    "industry": "creative",
+    "keywords": "brutalist",
+    "palette": "creative-bold-magenta",
+    "pattern": "editorial",
+    "product_type": "agency-portfolio",
+    "style": "brutalist",
+    "typography": "tech-precise"
+  },
+  "agency-portfolio|own-mood": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "bold-magenta, precise, bold",
+    "palette": "creative-bold-magenta",
+    "pattern": "editorial",
+    "product_type": "agency-portfolio",
+    "style": "swiss-grid",
+    "typography": "tech-precise"
+  },
+  "automotive|bold-premium": {
+    "fallbacks": [],
+    "industry": "automotive",
+    "keywords": "bold, premium",
+    "palette": "automotive-performance-red",
+    "pattern": "media-led",
+    "product_type": "automotive",
+    "style": "dark-tech",
+    "typography": "tech-precise"
+  },
+  "automotive|default": {
+    "fallbacks": [],
+    "industry": "automotive",
+    "keywords": "",
+    "palette": "automotive-performance-red",
+    "pattern": "media-led",
+    "product_type": "automotive",
+    "style": "dark-tech",
+    "typography": "tech-precise"
+  },
+  "automotive|lone-clean": {
+    "fallbacks": [],
+    "industry": "automotive",
+    "keywords": "clean",
+    "palette": "automotive-performance-red",
+    "pattern": "media-led",
+    "product_type": "automotive",
+    "style": "dark-tech",
+    "typography": "modern-neutral"
+  },
+  "automotive|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'dark-tech' (drop the keyword to keep the default)"
+    ],
+    "industry": "automotive",
+    "keywords": "modern, minimal",
+    "palette": "automotive-performance-red",
+    "pattern": "media-led",
+    "product_type": "automotive",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "automotive|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'dark-tech' (drop the keyword to keep the default)"
+    ],
+    "industry": "automotive",
+    "keywords": "brutalist",
+    "palette": "automotive-performance-red",
+    "pattern": "media-led",
+    "product_type": "automotive",
+    "style": "brutalist",
+    "typography": "tech-precise"
+  },
+  "automotive|own-mood": {
+    "fallbacks": [],
+    "industry": "automotive",
+    "keywords": "performance-red, bold, sharp",
+    "palette": "automotive-performance-red",
+    "pattern": "media-led",
+    "product_type": "automotive",
+    "style": "dark-tech",
+    "typography": "tech-precise"
+  },
+  "b2b-enterprise|bold-premium": {
+    "fallbacks": [],
+    "industry": "b2b",
+    "keywords": "bold, premium",
+    "palette": "fintech-confident-navy",
+    "pattern": "content-first",
+    "product_type": "b2b-enterprise",
+    "style": "corporate-clean",
+    "typography": "corporate-duo"
+  },
+  "b2b-enterprise|default": {
+    "fallbacks": [],
+    "industry": "b2b",
+    "keywords": "",
+    "palette": "fintech-confident-navy",
+    "pattern": "content-first",
+    "product_type": "b2b-enterprise",
+    "style": "corporate-clean",
+    "typography": "corporate-duo"
+  },
+  "b2b-enterprise|lone-clean": {
+    "fallbacks": [],
+    "industry": "b2b",
+    "keywords": "clean",
+    "palette": "fintech-confident-navy",
+    "pattern": "content-first",
+    "product_type": "b2b-enterprise",
+    "style": "corporate-clean",
+    "typography": "corporate-duo"
+  },
+  "b2b-enterprise|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "b2b",
+    "keywords": "modern, minimal",
+    "palette": "fintech-confident-navy",
+    "pattern": "content-first",
+    "product_type": "b2b-enterprise",
+    "style": "minimal",
+    "typography": "corporate-duo"
+  },
+  "b2b-enterprise|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "b2b",
+    "keywords": "brutalist",
+    "palette": "fintech-confident-navy",
+    "pattern": "content-first",
+    "product_type": "b2b-enterprise",
+    "style": "brutalist",
+    "typography": "corporate-duo"
+  },
+  "b2b-enterprise|own-mood": {
+    "fallbacks": [],
+    "industry": "b2b",
+    "keywords": "confident-navy, credible, professional",
+    "palette": "fintech-confident-navy",
+    "pattern": "content-first",
+    "product_type": "b2b-enterprise",
+    "style": "corporate-clean",
+    "typography": "corporate-duo"
+  },
+  "beauty-cosmetics|bold-premium": {
+    "fallbacks": [],
+    "industry": "beauty",
+    "keywords": "bold, premium",
+    "palette": "beauty-blush-rose",
+    "pattern": "media-led",
+    "product_type": "beauty-cosmetics",
+    "style": "luxury-serif",
+    "typography": "luxury-refined"
+  },
+  "beauty-cosmetics|default": {
+    "fallbacks": [],
+    "industry": "beauty",
+    "keywords": "",
+    "palette": "beauty-blush-rose",
+    "pattern": "media-led",
+    "product_type": "beauty-cosmetics",
+    "style": "luxury-serif",
+    "typography": "elegant-contrast"
+  },
+  "beauty-cosmetics|lone-clean": {
+    "fallbacks": [],
+    "industry": "beauty",
+    "keywords": "clean",
+    "palette": "beauty-blush-rose",
+    "pattern": "media-led",
+    "product_type": "beauty-cosmetics",
+    "style": "luxury-serif",
+    "typography": "elegant-contrast"
+  },
+  "beauty-cosmetics|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'luxury-serif' (drop the keyword to keep the default)"
+    ],
+    "industry": "beauty",
+    "keywords": "modern, minimal",
+    "palette": "beauty-blush-rose",
+    "pattern": "media-led",
+    "product_type": "beauty-cosmetics",
+    "style": "minimal",
+    "typography": "elegant-contrast"
+  },
+  "beauty-cosmetics|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'luxury-serif' (drop the keyword to keep the default)"
+    ],
+    "industry": "beauty",
+    "keywords": "brutalist",
+    "palette": "beauty-blush-rose",
+    "pattern": "media-led",
+    "product_type": "beauty-cosmetics",
+    "style": "brutalist",
+    "typography": "elegant-contrast"
+  },
+  "beauty-cosmetics|own-mood": {
+    "fallbacks": [],
+    "industry": "beauty",
+    "keywords": "blush-rose, elegant, refined",
+    "palette": "beauty-blush-rose",
+    "pattern": "media-led",
+    "product_type": "beauty-cosmetics",
+    "style": "luxury-serif",
+    "typography": "elegant-contrast"
+  },
+  "blog-publisher|bold-premium": {
+    "fallbacks": [],
+    "industry": "media",
+    "keywords": "bold, premium",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "blog-publisher",
+    "style": "editorial",
+    "typography": "editorial-classic"
+  },
+  "blog-publisher|default": {
+    "fallbacks": [],
+    "industry": "media",
+    "keywords": "",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "blog-publisher",
+    "style": "editorial",
+    "typography": "editorial-classic"
+  },
+  "blog-publisher|lone-clean": {
+    "fallbacks": [],
+    "industry": "media",
+    "keywords": "clean",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "blog-publisher",
+    "style": "editorial",
+    "typography": "modern-neutral"
+  },
+  "blog-publisher|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'editorial' (drop the keyword to keep the default)"
+    ],
+    "industry": "media",
+    "keywords": "modern, minimal",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "blog-publisher",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "blog-publisher|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'editorial' (drop the keyword to keep the default)"
+    ],
+    "industry": "media",
+    "keywords": "brutalist",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "blog-publisher",
+    "style": "brutalist",
+    "typography": "editorial-classic"
+  },
+  "blog-publisher|own-mood": {
+    "fallbacks": [],
+    "industry": "media",
+    "keywords": "editorial-ink, literary, readable",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "blog-publisher",
+    "style": "editorial",
+    "typography": "editorial-classic"
+  },
+  "developer-tool|bold-premium": {
+    "fallbacks": [],
+    "industry": "tech",
+    "keywords": "bold, premium",
+    "palette": "ecommerce-premium-plum",
+    "pattern": "content-first",
+    "product_type": "developer-tool",
+    "style": "dark-tech",
+    "typography": "tech-precise"
+  },
+  "developer-tool|default": {
+    "fallbacks": [],
+    "industry": "tech",
+    "keywords": "",
+    "palette": "tech-hardware-industrial-steel",
+    "pattern": "content-first",
+    "product_type": "developer-tool",
+    "style": "dark-tech",
+    "typography": "tech-precise"
+  },
+  "developer-tool|lone-clean": {
+    "fallbacks": [],
+    "industry": "tech",
+    "keywords": "clean",
+    "palette": "tech-hardware-industrial-steel",
+    "pattern": "content-first",
+    "product_type": "developer-tool",
+    "style": "dark-tech",
+    "typography": "tech-precise"
+  },
+  "developer-tool|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'dark-tech' (drop the keyword to keep the default)"
+    ],
+    "industry": "tech",
+    "keywords": "modern, minimal",
+    "palette": "saas-modern-violet",
+    "pattern": "content-first",
+    "product_type": "developer-tool",
+    "style": "minimal",
+    "typography": "tech-precise"
+  },
+  "developer-tool|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'dark-tech' (drop the keyword to keep the default)"
+    ],
+    "industry": "tech",
+    "keywords": "brutalist",
+    "palette": "tech-hardware-industrial-steel",
+    "pattern": "content-first",
+    "product_type": "developer-tool",
+    "style": "brutalist",
+    "typography": "tech-precise"
+  },
+  "developer-tool|own-mood": {
+    "fallbacks": [],
+    "industry": "tech",
+    "keywords": "technical, technical, sharp",
+    "palette": "tech-hardware-industrial-steel",
+    "pattern": "content-first",
+    "product_type": "developer-tool",
+    "style": "dark-tech",
+    "typography": "tech-precise"
+  },
+  "ecommerce-store|bold-premium": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "bold, premium",
+    "palette": "ecommerce-energetic-coral",
+    "pattern": "catalog-grid",
+    "product_type": "ecommerce-store",
+    "style": "soft-ui",
+    "typography": "modern-neutral"
+  },
+  "ecommerce-store|default": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "",
+    "palette": "ecommerce-energetic-coral",
+    "pattern": "catalog-grid",
+    "product_type": "ecommerce-store",
+    "style": "soft-ui",
+    "typography": "modern-neutral"
+  },
+  "ecommerce-store|lone-clean": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "clean",
+    "palette": "ecommerce-energetic-coral",
+    "pattern": "catalog-grid",
+    "product_type": "ecommerce-store",
+    "style": "soft-ui",
+    "typography": "modern-neutral"
+  },
+  "ecommerce-store|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'soft-ui' (drop the keyword to keep the default)"
+    ],
+    "industry": "ecommerce",
+    "keywords": "modern, minimal",
+    "palette": "ecommerce-energetic-coral",
+    "pattern": "catalog-grid",
+    "product_type": "ecommerce-store",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "ecommerce-store|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'soft-ui' (drop the keyword to keep the default)"
+    ],
+    "industry": "ecommerce",
+    "keywords": "brutalist",
+    "palette": "ecommerce-energetic-coral",
+    "pattern": "catalog-grid",
+    "product_type": "ecommerce-store",
+    "style": "brutalist",
+    "typography": "modern-neutral"
+  },
+  "ecommerce-store|own-mood": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "energetic-coral, clean, friendly",
+    "palette": "ecommerce-energetic-coral",
+    "pattern": "catalog-grid",
+    "product_type": "ecommerce-store",
+    "style": "soft-ui",
+    "typography": "modern-neutral"
+  },
+  "education-course|bold-premium": {
+    "fallbacks": [],
+    "industry": "education",
+    "keywords": "bold, premium",
+    "palette": "education-friendly-azure",
+    "pattern": "content-first",
+    "product_type": "education-course",
+    "style": "soft-ui",
+    "typography": "friendly-rounded"
+  },
+  "education-course|default": {
+    "fallbacks": [],
+    "industry": "education",
+    "keywords": "",
+    "palette": "education-friendly-azure",
+    "pattern": "content-first",
+    "product_type": "education-course",
+    "style": "soft-ui",
+    "typography": "friendly-rounded"
+  },
+  "education-course|lone-clean": {
+    "fallbacks": [],
+    "industry": "education",
+    "keywords": "clean",
+    "palette": "education-friendly-azure",
+    "pattern": "content-first",
+    "product_type": "education-course",
+    "style": "soft-ui",
+    "typography": "friendly-rounded"
+  },
+  "education-course|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'soft-ui' (drop the keyword to keep the default)"
+    ],
+    "industry": "education",
+    "keywords": "modern, minimal",
+    "palette": "education-friendly-azure",
+    "pattern": "content-first",
+    "product_type": "education-course",
+    "style": "minimal",
+    "typography": "friendly-rounded"
+  },
+  "education-course|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'soft-ui' (drop the keyword to keep the default)"
+    ],
+    "industry": "education",
+    "keywords": "brutalist",
+    "palette": "education-friendly-azure",
+    "pattern": "content-first",
+    "product_type": "education-course",
+    "style": "brutalist",
+    "typography": "friendly-rounded"
+  },
+  "education-course|own-mood": {
+    "fallbacks": [],
+    "industry": "education",
+    "keywords": "friendly-azure, friendly, clear",
+    "palette": "education-friendly-azure",
+    "pattern": "content-first",
+    "product_type": "education-course",
+    "style": "soft-ui",
+    "typography": "friendly-rounded"
+  },
+  "event-conference|bold-premium": {
+    "fallbacks": [],
+    "industry": "events",
+    "keywords": "bold, premium",
+    "palette": "creative-bold-magenta",
+    "pattern": "hero-centric",
+    "product_type": "event-conference",
+    "style": "gradient-vibrant",
+    "typography": "bold-startup"
+  },
+  "event-conference|default": {
+    "fallbacks": [],
+    "industry": "events",
+    "keywords": "",
+    "palette": "creative-bold-magenta",
+    "pattern": "hero-centric",
+    "product_type": "event-conference",
+    "style": "gradient-vibrant",
+    "typography": "bold-startup"
+  },
+  "event-conference|lone-clean": {
+    "fallbacks": [],
+    "industry": "events",
+    "keywords": "clean",
+    "palette": "creative-bold-magenta",
+    "pattern": "hero-centric",
+    "product_type": "event-conference",
+    "style": "gradient-vibrant",
+    "typography": "bold-startup"
+  },
+  "event-conference|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'gradient-vibrant' (drop the keyword to keep the default)"
+    ],
+    "industry": "events",
+    "keywords": "modern, minimal",
+    "palette": "creative-bold-magenta",
+    "pattern": "hero-centric",
+    "product_type": "event-conference",
+    "style": "minimal",
+    "typography": "bold-startup"
+  },
+  "event-conference|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'gradient-vibrant' (drop the keyword to keep the default)"
+    ],
+    "industry": "events",
+    "keywords": "brutalist",
+    "palette": "creative-bold-magenta",
+    "pattern": "hero-centric",
+    "product_type": "event-conference",
+    "style": "brutalist",
+    "typography": "bold-startup"
+  },
+  "event-conference|own-mood": {
+    "fallbacks": [],
+    "industry": "events",
+    "keywords": "bold-magenta, energetic, bold",
+    "palette": "creative-bold-magenta",
+    "pattern": "hero-centric",
+    "product_type": "event-conference",
+    "style": "gradient-vibrant",
+    "typography": "bold-startup"
+  },
+  "fintech-consumer|bold-premium": {
+    "fallbacks": [],
+    "industry": "fintech",
+    "keywords": "bold, premium",
+    "palette": "fintech-confident-navy",
+    "pattern": "hero-centric",
+    "product_type": "fintech-consumer",
+    "style": "corporate-clean",
+    "typography": "approachable-saas"
+  },
+  "fintech-consumer|default": {
+    "fallbacks": [],
+    "industry": "fintech",
+    "keywords": "",
+    "palette": "fintech-confident-navy",
+    "pattern": "hero-centric",
+    "product_type": "fintech-consumer",
+    "style": "corporate-clean",
+    "typography": "approachable-saas"
+  },
+  "fintech-consumer|lone-clean": {
+    "fallbacks": [],
+    "industry": "fintech",
+    "keywords": "clean",
+    "palette": "fintech-confident-navy",
+    "pattern": "hero-centric",
+    "product_type": "fintech-consumer",
+    "style": "corporate-clean",
+    "typography": "approachable-saas"
+  },
+  "fintech-consumer|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "fintech",
+    "keywords": "modern, minimal",
+    "palette": "fintech-confident-navy",
+    "pattern": "hero-centric",
+    "product_type": "fintech-consumer",
+    "style": "minimal",
+    "typography": "approachable-saas"
+  },
+  "fintech-consumer|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "fintech",
+    "keywords": "brutalist",
+    "palette": "fintech-confident-navy",
+    "pattern": "hero-centric",
+    "product_type": "fintech-consumer",
+    "style": "brutalist",
+    "typography": "approachable-saas"
+  },
+  "fintech-consumer|own-mood": {
+    "fallbacks": [],
+    "industry": "fintech",
+    "keywords": "confident-navy, credible, modern",
+    "palette": "fintech-confident-navy",
+    "pattern": "hero-centric",
+    "product_type": "fintech-consumer",
+    "style": "corporate-clean",
+    "typography": "approachable-saas"
+  },
+  "fitness-gym|bold-premium": {
+    "fallbacks": [],
+    "industry": "fitness",
+    "keywords": "bold, premium",
+    "palette": "fitness-high-energy-lime",
+    "pattern": "hero-centric",
+    "product_type": "fitness-gym",
+    "style": "neo-brutalist",
+    "typography": "bold-startup"
+  },
+  "fitness-gym|default": {
+    "fallbacks": [],
+    "industry": "fitness",
+    "keywords": "",
+    "palette": "fitness-high-energy-lime",
+    "pattern": "hero-centric",
+    "product_type": "fitness-gym",
+    "style": "neo-brutalist",
+    "typography": "bold-startup"
+  },
+  "fitness-gym|lone-clean": {
+    "fallbacks": [],
+    "industry": "fitness",
+    "keywords": "clean",
+    "palette": "fitness-high-energy-lime",
+    "pattern": "hero-centric",
+    "product_type": "fitness-gym",
+    "style": "neo-brutalist",
+    "typography": "bold-startup"
+  },
+  "fitness-gym|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'neo-brutalist' (drop the keyword to keep the default)"
+    ],
+    "industry": "fitness",
+    "keywords": "modern, minimal",
+    "palette": "fitness-high-energy-lime",
+    "pattern": "hero-centric",
+    "product_type": "fitness-gym",
+    "style": "minimal",
+    "typography": "bold-startup"
+  },
+  "fitness-gym|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'neo-brutalist' (drop the keyword to keep the default)"
+    ],
+    "industry": "fitness",
+    "keywords": "brutalist",
+    "palette": "fitness-high-energy-lime",
+    "pattern": "hero-centric",
+    "product_type": "fitness-gym",
+    "style": "brutalist",
+    "typography": "bold-startup"
+  },
+  "fitness-gym|own-mood": {
+    "fallbacks": [],
+    "industry": "fitness",
+    "keywords": "high-energy-lime, energetic, bold",
+    "palette": "fitness-high-energy-lime",
+    "pattern": "hero-centric",
+    "product_type": "fitness-gym",
+    "style": "neo-brutalist",
+    "typography": "bold-startup"
+  },
+  "healthcare-practice|bold-premium": {
+    "fallbacks": [],
+    "industry": "healthcare",
+    "keywords": "bold, premium",
+    "palette": "healthcare-calm-teal",
+    "pattern": "hero-centric",
+    "product_type": "healthcare-practice",
+    "style": "corporate-clean",
+    "typography": "trusted-business"
+  },
+  "healthcare-practice|default": {
+    "fallbacks": [],
+    "industry": "healthcare",
+    "keywords": "",
+    "palette": "healthcare-calm-teal",
+    "pattern": "hero-centric",
+    "product_type": "healthcare-practice",
+    "style": "corporate-clean",
+    "typography": "trusted-business"
+  },
+  "healthcare-practice|lone-clean": {
+    "fallbacks": [],
+    "industry": "healthcare",
+    "keywords": "clean",
+    "palette": "healthcare-calm-teal",
+    "pattern": "hero-centric",
+    "product_type": "healthcare-practice",
+    "style": "corporate-clean",
+    "typography": "modern-neutral"
+  },
+  "healthcare-practice|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "healthcare",
+    "keywords": "modern, minimal",
+    "palette": "healthcare-calm-teal",
+    "pattern": "hero-centric",
+    "product_type": "healthcare-practice",
+    "style": "minimal",
+    "typography": "trusted-business"
+  },
+  "healthcare-practice|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "healthcare",
+    "keywords": "brutalist",
+    "palette": "healthcare-calm-teal",
+    "pattern": "hero-centric",
+    "product_type": "healthcare-practice",
+    "style": "brutalist",
+    "typography": "trusted-business"
+  },
+  "healthcare-practice|own-mood": {
+    "fallbacks": [],
+    "industry": "healthcare",
+    "keywords": "calm-teal, credible, calm",
+    "palette": "healthcare-calm-teal",
+    "pattern": "hero-centric",
+    "product_type": "healthcare-practice",
+    "style": "corporate-clean",
+    "typography": "trusted-business"
+  },
+  "kids-family|bold-premium": {
+    "fallbacks": [],
+    "industry": "kids",
+    "keywords": "bold, premium",
+    "palette": "kids-playful-tangerine",
+    "pattern": "hero-centric",
+    "product_type": "kids-family",
+    "style": "claymorphism",
+    "typography": "playful-display"
+  },
+  "kids-family|default": {
+    "fallbacks": [],
+    "industry": "kids",
+    "keywords": "",
+    "palette": "kids-playful-tangerine",
+    "pattern": "hero-centric",
+    "product_type": "kids-family",
+    "style": "claymorphism",
+    "typography": "playful-display"
+  },
+  "kids-family|lone-clean": {
+    "fallbacks": [],
+    "industry": "kids",
+    "keywords": "clean",
+    "palette": "kids-playful-tangerine",
+    "pattern": "hero-centric",
+    "product_type": "kids-family",
+    "style": "claymorphism",
+    "typography": "playful-display"
+  },
+  "kids-family|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'claymorphism' (drop the keyword to keep the default)"
+    ],
+    "industry": "kids",
+    "keywords": "modern, minimal",
+    "palette": "kids-playful-tangerine",
+    "pattern": "hero-centric",
+    "product_type": "kids-family",
+    "style": "minimal",
+    "typography": "playful-display"
+  },
+  "kids-family|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'claymorphism' (drop the keyword to keep the default)"
+    ],
+    "industry": "kids",
+    "keywords": "brutalist",
+    "palette": "kids-playful-tangerine",
+    "pattern": "hero-centric",
+    "product_type": "kids-family",
+    "style": "brutalist",
+    "typography": "playful-display"
+  },
+  "kids-family|own-mood": {
+    "fallbacks": [],
+    "industry": "kids",
+    "keywords": "playful-tangerine, playful, fun",
+    "palette": "kids-playful-tangerine",
+    "pattern": "hero-centric",
+    "product_type": "kids-family",
+    "style": "claymorphism",
+    "typography": "playful-display"
+  },
+  "local-service|bold-premium": {
+    "fallbacks": [],
+    "industry": "home-services",
+    "keywords": "bold, premium",
+    "palette": "realestate-grounded-slate",
+    "pattern": "hero-centric",
+    "product_type": "local-service",
+    "style": "corporate-clean",
+    "typography": "trusted-business"
+  },
+  "local-service|default": {
+    "fallbacks": [],
+    "industry": "home-services",
+    "keywords": "",
+    "palette": "realestate-grounded-slate",
+    "pattern": "hero-centric",
+    "product_type": "local-service",
+    "style": "corporate-clean",
+    "typography": "trusted-business"
+  },
+  "local-service|lone-clean": {
+    "fallbacks": [],
+    "industry": "home-services",
+    "keywords": "clean",
+    "palette": "realestate-grounded-slate",
+    "pattern": "hero-centric",
+    "product_type": "local-service",
+    "style": "corporate-clean",
+    "typography": "modern-neutral"
+  },
+  "local-service|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "home-services",
+    "keywords": "modern, minimal",
+    "palette": "realestate-grounded-slate",
+    "pattern": "hero-centric",
+    "product_type": "local-service",
+    "style": "minimal",
+    "typography": "trusted-business"
+  },
+  "local-service|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'corporate-clean' (drop the keyword to keep the default)"
+    ],
+    "industry": "home-services",
+    "keywords": "brutalist",
+    "palette": "realestate-grounded-slate",
+    "pattern": "hero-centric",
+    "product_type": "local-service",
+    "style": "brutalist",
+    "typography": "trusted-business"
+  },
+  "local-service|own-mood": {
+    "fallbacks": [],
+    "industry": "home-services",
+    "keywords": "grounded-slate, credible, friendly",
+    "palette": "realestate-grounded-slate",
+    "pattern": "hero-centric",
+    "product_type": "local-service",
+    "style": "corporate-clean",
+    "typography": "trusted-business"
+  },
+  "luxury-brand|bold-premium": {
+    "fallbacks": [],
+    "industry": "luxury",
+    "keywords": "bold, premium",
+    "palette": "luxury-gold-on-charcoal",
+    "pattern": "editorial",
+    "product_type": "luxury-brand",
+    "style": "luxury-serif",
+    "typography": "luxury-refined"
+  },
+  "luxury-brand|default": {
+    "fallbacks": [],
+    "industry": "luxury",
+    "keywords": "",
+    "palette": "luxury-gold-on-charcoal",
+    "pattern": "editorial",
+    "product_type": "luxury-brand",
+    "style": "luxury-serif",
+    "typography": "luxury-refined"
+  },
+  "luxury-brand|lone-clean": {
+    "fallbacks": [],
+    "industry": "luxury",
+    "keywords": "clean",
+    "palette": "luxury-gold-on-charcoal",
+    "pattern": "editorial",
+    "product_type": "luxury-brand",
+    "style": "luxury-serif",
+    "typography": "luxury-refined"
+  },
+  "luxury-brand|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'luxury-serif' (drop the keyword to keep the default)"
+    ],
+    "industry": "luxury",
+    "keywords": "modern, minimal",
+    "palette": "luxury-gold-on-charcoal",
+    "pattern": "editorial",
+    "product_type": "luxury-brand",
+    "style": "minimal",
+    "typography": "luxury-refined"
+  },
+  "luxury-brand|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'luxury-serif' (drop the keyword to keep the default)"
+    ],
+    "industry": "luxury",
+    "keywords": "brutalist",
+    "palette": "luxury-gold-on-charcoal",
+    "pattern": "editorial",
+    "product_type": "luxury-brand",
+    "style": "brutalist",
+    "typography": "luxury-refined"
+  },
+  "luxury-brand|own-mood": {
+    "fallbacks": [],
+    "industry": "luxury",
+    "keywords": "gold-on-charcoal, elegant, timeless",
+    "palette": "luxury-gold-on-charcoal",
+    "pattern": "editorial",
+    "product_type": "luxury-brand",
+    "style": "luxury-serif",
+    "typography": "luxury-refined"
+  },
+  "mobile-app-landing|bold-premium": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "bold, premium",
+    "palette": "saas-modern-violet",
+    "pattern": "hero-centric",
+    "product_type": "mobile-app-landing",
+    "style": "gradient-vibrant",
+    "typography": "bold-startup"
+  },
+  "mobile-app-landing|default": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "",
+    "palette": "saas-modern-violet",
+    "pattern": "hero-centric",
+    "product_type": "mobile-app-landing",
+    "style": "gradient-vibrant",
+    "typography": "bold-startup"
+  },
+  "mobile-app-landing|lone-clean": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "clean",
+    "palette": "saas-modern-violet",
+    "pattern": "hero-centric",
+    "product_type": "mobile-app-landing",
+    "style": "gradient-vibrant",
+    "typography": "clean-geometric"
+  },
+  "mobile-app-landing|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'gradient-vibrant' (drop the keyword to keep the default)"
+    ],
+    "industry": "saas",
+    "keywords": "modern, minimal",
+    "palette": "saas-modern-violet",
+    "pattern": "hero-centric",
+    "product_type": "mobile-app-landing",
+    "style": "minimal",
+    "typography": "bold-startup"
+  },
+  "mobile-app-landing|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'gradient-vibrant' (drop the keyword to keep the default)"
+    ],
+    "industry": "saas",
+    "keywords": "brutalist",
+    "palette": "saas-modern-violet",
+    "pattern": "hero-centric",
+    "product_type": "mobile-app-landing",
+    "style": "brutalist",
+    "typography": "bold-startup"
+  },
+  "mobile-app-landing|own-mood": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "modern-violet, modern, energetic",
+    "palette": "saas-modern-violet",
+    "pattern": "hero-centric",
+    "product_type": "mobile-app-landing",
+    "style": "gradient-vibrant",
+    "typography": "bold-startup"
+  },
+  "nonprofit|bold-premium": {
+    "fallbacks": [],
+    "industry": "nonprofit",
+    "keywords": "bold, premium",
+    "palette": "nonprofit-hopeful-green",
+    "pattern": "hero-centric",
+    "product_type": "nonprofit",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "nonprofit|default": {
+    "fallbacks": [],
+    "industry": "nonprofit",
+    "keywords": "",
+    "palette": "nonprofit-hopeful-green",
+    "pattern": "hero-centric",
+    "product_type": "nonprofit",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "nonprofit|lone-clean": {
+    "fallbacks": [],
+    "industry": "nonprofit",
+    "keywords": "clean",
+    "palette": "nonprofit-hopeful-green",
+    "pattern": "hero-centric",
+    "product_type": "nonprofit",
+    "style": "organic-natural",
+    "typography": "modern-neutral"
+  },
+  "nonprofit|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'organic-natural' (drop the keyword to keep the default)"
+    ],
+    "industry": "nonprofit",
+    "keywords": "modern, minimal",
+    "palette": "nonprofit-hopeful-green",
+    "pattern": "hero-centric",
+    "product_type": "nonprofit",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "nonprofit|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'organic-natural' (drop the keyword to keep the default)"
+    ],
+    "industry": "nonprofit",
+    "keywords": "brutalist",
+    "palette": "nonprofit-hopeful-green",
+    "pattern": "hero-centric",
+    "product_type": "nonprofit",
+    "style": "brutalist",
+    "typography": "warm-humanist"
+  },
+  "nonprofit|own-mood": {
+    "fallbacks": [],
+    "industry": "nonprofit",
+    "keywords": "hopeful-green, warm, hopeful",
+    "palette": "nonprofit-hopeful-green",
+    "pattern": "hero-centric",
+    "product_type": "nonprofit",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "personal-brand|bold-premium": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "bold, premium",
+    "palette": "creative-bold-magenta",
+    "pattern": "content-first",
+    "product_type": "personal-brand",
+    "style": "editorial",
+    "typography": "magazine-impact"
+  },
+  "personal-brand|default": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "personal-brand",
+    "style": "editorial",
+    "typography": "editorial-classic"
+  },
+  "personal-brand|lone-clean": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "clean",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "personal-brand",
+    "style": "editorial",
+    "typography": "modern-neutral"
+  },
+  "personal-brand|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'editorial' (drop the keyword to keep the default)"
+    ],
+    "industry": "creative",
+    "keywords": "modern, minimal",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "personal-brand",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "personal-brand|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'editorial' (drop the keyword to keep the default)"
+    ],
+    "industry": "creative",
+    "keywords": "brutalist",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "personal-brand",
+    "style": "brutalist",
+    "typography": "editorial-classic"
+  },
+  "personal-brand|own-mood": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "editorial-ink, expressive, literary",
+    "palette": "media-editorial-ink",
+    "pattern": "content-first",
+    "product_type": "personal-brand",
+    "style": "editorial",
+    "typography": "editorial-classic"
+  },
+  "portfolio-photographer|bold-premium": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "bold, premium",
+    "palette": "creative-bold-magenta",
+    "pattern": "media-led",
+    "product_type": "portfolio-photographer",
+    "style": "minimal",
+    "typography": "luxury-refined"
+  },
+  "portfolio-photographer|default": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "",
+    "palette": "media-editorial-ink",
+    "pattern": "media-led",
+    "product_type": "portfolio-photographer",
+    "style": "minimal",
+    "typography": "luxury-refined"
+  },
+  "portfolio-photographer|lone-clean": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "clean",
+    "palette": "media-editorial-ink",
+    "pattern": "media-led",
+    "product_type": "portfolio-photographer",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "portfolio-photographer|modern-minimal": {
+    "fallbacks": [],
+    "industry": "creative",
+    "keywords": "modern, minimal",
+    "palette": "media-editorial-ink",
+    "pattern": "media-led",
+    "product_type": "portfolio-photographer",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "portfolio-photographer|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'minimal' (drop the keyword to keep the default)"
+    ],
+    "industry": "creative",
+    "keywords": "brutalist",
+    "palette": "media-editorial-ink",
+    "pattern": "media-led",
+    "product_type": "portfolio-photographer",
+    "style": "brutalist",
+    "typography": "luxury-refined"
+  },
+  "portfolio-photographer|own-mood": {
+    "fallbacks": [
+      "style: keyword 'editorial' overrode the product default 'minimal' (drop the keyword to keep the default)"
+    ],
+    "industry": "creative",
+    "keywords": "editorial-ink, refined, expressive",
+    "palette": "media-editorial-ink",
+    "pattern": "media-led",
+    "product_type": "portfolio-photographer",
+    "style": "editorial",
+    "typography": "editorial-classic"
+  },
+  "product-detail-page|bold-premium": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "bold, premium",
+    "palette": "ecommerce-premium-plum",
+    "pattern": "media-led",
+    "product_type": "product-detail-page",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "product-detail-page|default": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "",
+    "palette": "ecommerce-premium-plum",
+    "pattern": "media-led",
+    "product_type": "product-detail-page",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "product-detail-page|lone-clean": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "clean",
+    "palette": "ecommerce-premium-plum",
+    "pattern": "media-led",
+    "product_type": "product-detail-page",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "product-detail-page|modern-minimal": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "modern, minimal",
+    "palette": "ecommerce-premium-plum",
+    "pattern": "media-led",
+    "product_type": "product-detail-page",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "product-detail-page|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'minimal' (drop the keyword to keep the default)"
+    ],
+    "industry": "ecommerce",
+    "keywords": "brutalist",
+    "palette": "ecommerce-premium-plum",
+    "pattern": "media-led",
+    "product_type": "product-detail-page",
+    "style": "brutalist",
+    "typography": "modern-neutral"
+  },
+  "product-detail-page|own-mood": {
+    "fallbacks": [],
+    "industry": "ecommerce",
+    "keywords": "premium-plum, clean, modern",
+    "palette": "ecommerce-premium-plum",
+    "pattern": "media-led",
+    "product_type": "product-detail-page",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "real-estate|bold-premium": {
+    "fallbacks": [],
+    "industry": "realestate",
+    "keywords": "bold, premium",
+    "palette": "realestate-grounded-slate",
+    "pattern": "catalog-grid",
+    "product_type": "real-estate",
+    "style": "minimal",
+    "typography": "luxury-refined"
+  },
+  "real-estate|default": {
+    "fallbacks": [],
+    "industry": "realestate",
+    "keywords": "",
+    "palette": "realestate-grounded-slate",
+    "pattern": "catalog-grid",
+    "product_type": "real-estate",
+    "style": "minimal",
+    "typography": "trusted-business"
+  },
+  "real-estate|lone-clean": {
+    "fallbacks": [],
+    "industry": "realestate",
+    "keywords": "clean",
+    "palette": "realestate-grounded-slate",
+    "pattern": "catalog-grid",
+    "product_type": "real-estate",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "real-estate|modern-minimal": {
+    "fallbacks": [],
+    "industry": "realestate",
+    "keywords": "modern, minimal",
+    "palette": "realestate-grounded-slate",
+    "pattern": "catalog-grid",
+    "product_type": "real-estate",
+    "style": "minimal",
+    "typography": "trusted-business"
+  },
+  "real-estate|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'minimal' (drop the keyword to keep the default)"
+    ],
+    "industry": "realestate",
+    "keywords": "brutalist",
+    "palette": "realestate-grounded-slate",
+    "pattern": "catalog-grid",
+    "product_type": "real-estate",
+    "style": "brutalist",
+    "typography": "trusted-business"
+  },
+  "real-estate|own-mood": {
+    "fallbacks": [],
+    "industry": "realestate",
+    "keywords": "grounded-slate, credible, modern",
+    "palette": "realestate-grounded-slate",
+    "pattern": "catalog-grid",
+    "product_type": "real-estate",
+    "style": "minimal",
+    "typography": "trusted-business"
+  },
+  "restaurant|bold-premium": {
+    "fallbacks": [],
+    "industry": "food-bev",
+    "keywords": "bold, premium",
+    "palette": "food-bev-appetite-red",
+    "pattern": "media-led",
+    "product_type": "restaurant",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "restaurant|default": {
+    "fallbacks": [],
+    "industry": "food-bev",
+    "keywords": "",
+    "palette": "food-bev-appetite-red",
+    "pattern": "media-led",
+    "product_type": "restaurant",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "restaurant|lone-clean": {
+    "fallbacks": [],
+    "industry": "food-bev",
+    "keywords": "clean",
+    "palette": "food-bev-appetite-red",
+    "pattern": "media-led",
+    "product_type": "restaurant",
+    "style": "organic-natural",
+    "typography": "modern-neutral"
+  },
+  "restaurant|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'organic-natural' (drop the keyword to keep the default)"
+    ],
+    "industry": "food-bev",
+    "keywords": "modern, minimal",
+    "palette": "food-bev-appetite-red",
+    "pattern": "media-led",
+    "product_type": "restaurant",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "restaurant|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'organic-natural' (drop the keyword to keep the default)"
+    ],
+    "industry": "food-bev",
+    "keywords": "brutalist",
+    "palette": "food-bev-appetite-red",
+    "pattern": "media-led",
+    "product_type": "restaurant",
+    "style": "brutalist",
+    "typography": "warm-humanist"
+  },
+  "restaurant|own-mood": {
+    "fallbacks": [],
+    "industry": "food-bev",
+    "keywords": "appetite-red, warm, appetite",
+    "palette": "food-bev-appetite-red",
+    "pattern": "media-led",
+    "product_type": "restaurant",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "saas-dashboard|bold-premium": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "bold, premium",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "app-shell",
+    "product_type": "saas-dashboard",
+    "style": "flat-2.0",
+    "typography": "clean-geometric"
+  },
+  "saas-dashboard|default": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "app-shell",
+    "product_type": "saas-dashboard",
+    "style": "flat-2.0",
+    "typography": "clean-geometric"
+  },
+  "saas-dashboard|lone-clean": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "clean",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "app-shell",
+    "product_type": "saas-dashboard",
+    "style": "flat-2.0",
+    "typography": "clean-geometric"
+  },
+  "saas-dashboard|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'flat-2.0' (drop the keyword to keep the default)"
+    ],
+    "industry": "saas",
+    "keywords": "modern, minimal",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "app-shell",
+    "product_type": "saas-dashboard",
+    "style": "minimal",
+    "typography": "clean-geometric"
+  },
+  "saas-dashboard|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'flat-2.0' (drop the keyword to keep the default)"
+    ],
+    "industry": "saas",
+    "keywords": "brutalist",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "app-shell",
+    "product_type": "saas-dashboard",
+    "style": "brutalist",
+    "typography": "clean-geometric"
+  },
+  "saas-dashboard|own-mood": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "trustworthy-cool, clean, efficient",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "app-shell",
+    "product_type": "saas-dashboard",
+    "style": "flat-2.0",
+    "typography": "clean-geometric"
+  },
+  "saas-landing|bold-premium": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "bold, premium",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "hero-centric",
+    "product_type": "saas-landing",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "saas-landing|default": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "hero-centric",
+    "product_type": "saas-landing",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "saas-landing|lone-clean": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "clean",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "hero-centric",
+    "product_type": "saas-landing",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "saas-landing|modern-minimal": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "modern, minimal",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "hero-centric",
+    "product_type": "saas-landing",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "saas-landing|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'minimal' (drop the keyword to keep the default)"
+    ],
+    "industry": "saas",
+    "keywords": "brutalist",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "hero-centric",
+    "product_type": "saas-landing",
+    "style": "brutalist",
+    "typography": "modern-neutral"
+  },
+  "saas-landing|own-mood": {
+    "fallbacks": [],
+    "industry": "saas",
+    "keywords": "trustworthy-cool, modern, clean",
+    "palette": "saas-trustworthy-cool",
+    "pattern": "hero-centric",
+    "product_type": "saas-landing",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "travel-tourism|bold-premium": {
+    "fallbacks": [],
+    "industry": "travel",
+    "keywords": "bold, premium",
+    "palette": "travel-horizon-teal",
+    "pattern": "media-led",
+    "product_type": "travel-tourism",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "travel-tourism|default": {
+    "fallbacks": [],
+    "industry": "travel",
+    "keywords": "",
+    "palette": "travel-horizon-teal",
+    "pattern": "media-led",
+    "product_type": "travel-tourism",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "travel-tourism|lone-clean": {
+    "fallbacks": [],
+    "industry": "travel",
+    "keywords": "clean",
+    "palette": "travel-horizon-teal",
+    "pattern": "media-led",
+    "product_type": "travel-tourism",
+    "style": "organic-natural",
+    "typography": "modern-neutral"
+  },
+  "travel-tourism|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'organic-natural' (drop the keyword to keep the default)"
+    ],
+    "industry": "travel",
+    "keywords": "modern, minimal",
+    "palette": "travel-horizon-teal",
+    "pattern": "media-led",
+    "product_type": "travel-tourism",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "travel-tourism|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'organic-natural' (drop the keyword to keep the default)"
+    ],
+    "industry": "travel",
+    "keywords": "brutalist",
+    "palette": "travel-horizon-teal",
+    "pattern": "media-led",
+    "product_type": "travel-tourism",
+    "style": "brutalist",
+    "typography": "warm-humanist"
+  },
+  "travel-tourism|own-mood": {
+    "fallbacks": [],
+    "industry": "travel",
+    "keywords": "horizon-teal, warm, immersive",
+    "palette": "travel-horizon-teal",
+    "pattern": "media-led",
+    "product_type": "travel-tourism",
+    "style": "organic-natural",
+    "typography": "warm-humanist"
+  },
+  "wellness-spa|bold-premium": {
+    "fallbacks": [],
+    "industry": "wellness",
+    "keywords": "bold, premium",
+    "palette": "wellness-soft-sage",
+    "pattern": "media-led",
+    "product_type": "wellness-spa",
+    "style": "soft-ui",
+    "typography": "warm-humanist"
+  },
+  "wellness-spa|default": {
+    "fallbacks": [],
+    "industry": "wellness",
+    "keywords": "",
+    "palette": "wellness-soft-sage",
+    "pattern": "media-led",
+    "product_type": "wellness-spa",
+    "style": "soft-ui",
+    "typography": "warm-humanist"
+  },
+  "wellness-spa|lone-clean": {
+    "fallbacks": [],
+    "industry": "wellness",
+    "keywords": "clean",
+    "palette": "wellness-soft-sage",
+    "pattern": "media-led",
+    "product_type": "wellness-spa",
+    "style": "soft-ui",
+    "typography": "modern-neutral"
+  },
+  "wellness-spa|modern-minimal": {
+    "fallbacks": [
+      "style: keyword 'minimal' overrode the product default 'soft-ui' (drop the keyword to keep the default)"
+    ],
+    "industry": "wellness",
+    "keywords": "modern, minimal",
+    "palette": "wellness-soft-sage",
+    "pattern": "media-led",
+    "product_type": "wellness-spa",
+    "style": "minimal",
+    "typography": "modern-neutral"
+  },
+  "wellness-spa|override-brutalist": {
+    "fallbacks": [
+      "style: keyword 'brutalist' overrode the product default 'soft-ui' (drop the keyword to keep the default)"
+    ],
+    "industry": "wellness",
+    "keywords": "brutalist",
+    "palette": "wellness-soft-sage",
+    "pattern": "media-led",
+    "product_type": "wellness-spa",
+    "style": "brutalist",
+    "typography": "warm-humanist"
+  },
+  "wellness-spa|own-mood": {
+    "fallbacks": [],
+    "industry": "wellness",
+    "keywords": "soft-sage, calm, gentle",
+    "palette": "wellness-soft-sage",
+    "pattern": "media-led",
+    "product_type": "wellness-spa",
+    "style": "soft-ui",
+    "typography": "warm-humanist"
+  }
+}

@@ -6,9 +6,13 @@ Does the deterministic part of turning a CSV into a report: load, profile column
 compute basic stats, optionally filter/group/select. The skill layer adds the
 human part — column labels and business rules. Standard library only (no pandas).
 
-Privacy: columns whose names look sensitive (password, token, ssn, api_key, ...)
-have their sample VALUES redacted in output by default, since this output may land
-in a transcript/log. Pass --show-sensitive to override (your own data, your call).
+Privacy (default-on, because this output may land in a transcript/log):
+  - CREDENTIAL columns (password, token, ssn, api_key, ...) have their sample VALUES
+    redacted. Pass --show-sensitive to override (your own data, your call).
+  - CONTACT-PII columns (email, phone, mobile, fax, contact, address, ssn, dob, ...)
+    are also redacted, AND any individual value that LOOKS like an email or a phone
+    number is masked, in every column. Pass --show-pii to opt out of contact-PII
+    redaction. Credentials stay redacted regardless of --show-pii.
 Other column values are intentionally shown — summarizing them is the tool's job.
 
 Contract (references/ENGINE-CONTRACTS.md): JSON to stdout by default; --human for
@@ -16,7 +20,7 @@ text; idempotent; never mutates the input.
 
 Usage:
   python3 csv_to_report.py --in data.csv [--group-by COL] [--filter "COL=VAL"] \\
-      [--select "A,B,C"] [--show-sensitive] [--human]
+      [--select "A,B,C"] [--show-sensitive] [--show-pii] [--human]
 """
 import argparse
 import csv
@@ -30,6 +34,49 @@ from collections import Counter, defaultdict
 SENSITIVE = re.compile(
     r"(password|passwd|secret|token|api[_-]?key|ssn|social.?security|"
     r"credit.?card|card.?number|cvv|auth|private[_-]?key|access[_-]?key)", re.I)
+
+# Contact-PII column headers — redacted by default (opt out with --show-pii). "ssn" is in
+# both sets (also a credential); a match in either set redacts the column by default.
+CONTACT_PII = re.compile(
+    r"(e[-_]?mail|phone|mobile|tel|fax|contact|address|ssn|dob|birth)", re.I)
+
+# Value-level PII: an email-looking value, or a phone-looking value (a run of >= 7 digits
+# with optional separators / leading +). Used to mask individual cells in ANY column.
+_EMAIL_VAL = re.compile(r"\b[\w.+-]+@[\w-]+\.[\w.-]+\b")
+_PHONE_VAL = re.compile(r"\+?\d[\d\s().\-]{5,}\d")
+
+
+def _looks_pii(v):
+    """True if a value looks like an email address or a phone number."""
+    if not isinstance(v, str):
+        return False
+    if _EMAIL_VAL.search(v):
+        return True
+    m = _PHONE_VAL.search(v)
+    return bool(m) and sum(ch.isdigit() for ch in m.group()) >= 7
+
+
+REDACTED = "[redacted]"
+
+
+def _redact_value(col, value, show_sensitive, show_pii):
+    """DISPLAY-ONLY masking for a single emitted value belonging to column `col`. Returns
+    (display_value, was_redacted); the REAL value is never touched here -- callers must have
+    already filtered/grouped on the real value, and use this only on the EMITTED
+    representation (the filter/applied echo, group-by keys, selected/human output).
+
+    A credential column (SENSITIVE header) is masked unless --show-sensitive and is NEVER
+    revealed by --show-pii. A contact-PII column (CONTACT_PII header) OR any PII-looking
+    value (email/phone) is masked unless --show-pii."""
+    if col and SENSITIVE.search(col):
+        return (value, False) if show_sensitive else (REDACTED, True)
+    if not show_pii:
+        if col and CONTACT_PII.search(col):
+            return REDACTED, True
+        s = value if isinstance(value, str) else ("" if value is None else str(value))
+        if _looks_pii(s):
+            return REDACTED, True
+    return value, False
 
 
 # Only strip commas that look like thousands separators (1,234 / 1,234.56). A lone
@@ -53,7 +100,7 @@ def _num(v):
         return None
 
 
-def profile_column(name, values, show_sensitive):
+def profile_column(name, values, show_sensitive, show_pii):
     non_empty = [v for v in values if v not in ("", None)]
     nums = [_num(v) for v in non_empty]
     numeric = [n for n in nums if n is not None]
@@ -65,8 +112,12 @@ def profile_column(name, values, show_sensitive):
         "empty": len(values) - len(non_empty),
         "distinct": len(set(non_empty)),
     }
-    sensitive = bool(SENSITIVE.search(name)) and not show_sensitive
-    if is_numeric and not sensitive:
+    # Column-level redaction by header name: credentials (unless --show-sensitive) and
+    # contact-PII columns (unless --show-pii). Credentials are never revealed by --show-pii.
+    is_cred = bool(SENSITIVE.search(name))
+    is_contact = bool(CONTACT_PII.search(name))
+    redact_col = (is_cred and not show_sensitive) or (is_contact and not show_pii)
+    if is_numeric and not redact_col:
         info["type"] = "numeric"
         info["min"] = round(min(numeric), 4)
         info["max"] = round(max(numeric), 4)
@@ -74,11 +125,22 @@ def profile_column(name, values, show_sensitive):
     else:
         info["type"] = "categorical"
         top = Counter(non_empty).most_common(5)
-        if sensitive:
+        if redact_col:
             info["redacted"] = True
             info["top_values"] = [{"value": "[redacted]", "count": c} for _, c in top]
         else:
-            info["top_values"] = [{"value": v, "count": c} for v, c in top]
+            # Value-level PII masking (default-on; opt out with --show-pii): any individual
+            # email/phone-looking value is masked even in an otherwise non-sensitive column.
+            tv, masked = [], False
+            for v, c in top:
+                if not show_pii and _looks_pii(v):
+                    tv.append({"value": "[redacted]", "count": c})
+                    masked = True
+                else:
+                    tv.append({"value": v, "count": c})
+            if masked:
+                info["redacted"] = True
+            info["top_values"] = tv
     return info
 
 
@@ -105,7 +167,10 @@ def main():
     ap.add_argument("--filter", dest="flt", default=None, help='COL=VALUE exact match')
     ap.add_argument("--select", default=None, help="comma-separated columns to keep")
     ap.add_argument("--show-sensitive", action="store_true",
-                    help="do not redact values of sensitive-looking columns")
+                    help="do not redact values of credential-looking columns")
+    ap.add_argument("--show-pii", action="store_true",
+                    help="do not redact contact-PII columns or email/phone-looking values "
+                         "(credentials stay redacted regardless)")
     ap.add_argument("--human", action="store_true")
     args = ap.parse_args()
 
@@ -139,8 +204,11 @@ def main():
             if col not in headers:
                 warnings.append(f"--filter column '{col}' not found; filter skipped")
             else:
+                # Filter on the REAL value; redact only the echoed representation so a
+                # PII/secret filter value cannot leak through `applied`.
                 rows = [r for r in rows if r.get(col, "") == val]
-                applied["filter"] = {col: val}
+                disp_val, _ = _redact_value(col, val, args.show_sensitive, args.show_pii)
+                applied["filter"] = {col: disp_val}
 
     # select
     if args.select:
@@ -159,7 +227,8 @@ def main():
         "column_count": len(headers),
         "applied": applied,
         "warnings": warnings,
-        "columns": [profile_column(h, [r.get(h, "") for r in rows], args.show_sensitive)
+        "columns": [profile_column(h, [r.get(h, "") for r in rows],
+                                    args.show_sensitive, args.show_pii)
                     for h in headers],
     }
 
@@ -167,12 +236,16 @@ def main():
         if args.group_by not in headers:
             warnings.append(f"--group-by column '{args.group_by}' not found; grouping skipped")
         else:
+            # Group by the REAL key; redact only the emitted key so a PII/secret group
+            # column cannot leak its values through the group-by output.
             groups = defaultdict(int)
             for r in rows:
                 groups[r.get(args.group_by, "")] += 1
             report["group_by"] = {
                 "column": args.group_by,
-                "groups": [{"value": k, "count": v}
+                "groups": [{"value": _redact_value(args.group_by, k,
+                                                   args.show_sensitive, args.show_pii)[0],
+                            "count": v}
                            for k, v in sorted(groups.items(), key=lambda x: -x[1])],
             }
 

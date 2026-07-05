@@ -1,6 +1,6 @@
 ---
 name: client-outreach
-description: Generate cold-outreach messages, follow-up sequences, and niche-authority positioning for landing the first clients in a service business. Trigger when the user says "client outreach", "cold email", "first client", "outreach sequence", "niche positioning", "follow-up sequence", "lemlist / instantly / mailshake", or is starting (or restarting) sales motion for an agency or service.
+description: Generate cold-outreach openers, value-led follow-up sequences, niche-authority positioning, and a tool-import CSV with CAN-SPAM/GDPR/CASL compliance-checklist fields for landing the first clients in a service business. Uses copywriting for sharper lines when available; otherwise drafts them inline. Trigger when the user says "client outreach", "cold email", "first client", "outreach sequence", "follow-up sequence", "niche positioning", "land my first client", or "import file for Instantly/lemlist/mailshake".
 ---
 
 # client-outreach
@@ -19,7 +19,7 @@ referral pipeline, not the money.
 
 - "client outreach" / "cold email" / "first client"
 - "outreach sequence" / "follow-up sequence" / "niche positioning"
-- "lemlist" / "instantly" / "mailshake" / "land my first client"
+- "land my first client" / "import file for Instantly/lemlist/mailshake"
 
 ## Inputs
 
@@ -53,8 +53,8 @@ referral pipeline, not the money.
 
 ## Dependencies
 
-- `templates/outreach-message-starter.md`, `templates/outreach-followup-sequence.md`
-- Optional: `copywriting` (sharper lines)
+- `templates/outreach-message-starter.md` (required), `templates/outreach-followup-sequence.md` (required)
+- `copywriting` (optional — adds sharper opener/CTA lines; free path: this skill drafts the lines inline)
 
 ## Notes
 

@@ -10,8 +10,8 @@
     {
       "name": "designer-pro-and-seo",
       "source": "./",
-      "description": "Web design + SEO + build-workflow skills: design-system generation + on-brand page rendering, design tokens, build briefs, pre-delivery QA, portable-HTML porting for any CMS, and a full SEO suite (technical, schema, sitemap, content, GEO, hreflang, drift, local, e-commerce). 45 stable skills, tool-aware (use a dedicated MCP/CLI when present, else built-in web/browser), mostly free-tier. Original, clean-room content.",
-      "version": "0.4.2",
+      "description": "45 Stable skills (14 Core, 28 Lite, 3 routing) for web design + SEO in Claude Code: design systems, on-brand page rendering, design tokens, build briefs, pre-delivery QA, and CMS porting, plus a full SEO suite (technical, schema, sitemap, content, GEO, hreflang, drift, local, e-commerce) with a real parallel-dispatch audit. Free-first and tool-aware (built-in web/browser by default, dedicated MCP/CLI when present). MIT, clean-room original.",
+      "version": "1.0.0",
       "author": {
         "name": "Zachary W.",
         "url": "https://articulatevision.com"
@@ -22,12 +22,16 @@
       "category": "design",
       "keywords": [
         "seo",
+        "technical-seo",
+        "schema",
+        "sitemap",
+        "geo",
+        "local-seo",
         "design",
-        "web",
+        "design-system",
         "ui-ux",
         "accessibility",
         "cro",
-        "design-system",
         "qa",
         "cms-port",
         "build-workflow"

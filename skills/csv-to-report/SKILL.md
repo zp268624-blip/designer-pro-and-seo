@@ -36,7 +36,7 @@ training compliance, staff scheduling, billing audits, inventory snapshots.
 
 1. **Profile the data mechanically:**
    ```
-   python3 "${CLAUDE_PLUGIN_ROOT}/scripts/workflow/csv_to_report.py" --in <file.csv> --human
+   python3 "${CLAUDE_PLUGIN_ROOT}/scripts/workflow/csv_to_report.py" --in <file.csv> --human   # use `py` on Windows if python3 is absent
    ```
    Returns row/column counts, per-column type + fill rate + distinct values,
    numeric stats, and top categories — so labeling is grounded in real data.

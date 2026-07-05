@@ -1,5 +1,135 @@
 # Release Notes
 
+## v1.0.0 — 2026-07-04 — v1 "Deep Core"
+
+The first deep release: a real parallel-dispatch SEO audit, deep original flagships,
+the design ranker (the moat, revertible), and a clean-room governance/CI spine — built
+in gated waves (W0–W5) on the `enrichment/v1-deep-core` branch and shipped as one
+version. **45 Stable = 14 Core + 28 Lite + 3 routing**, and the breakdown is CI-verified
+(C10) to partition the skills on disk exactly, so the count claim is mechanically
+un-fakeable. Every wave is gate-green (smoke 36/36 + unittest + verify_release); W0–W3b
+were additionally Codex-gated, **W3c–W5 gate on the automated suite at the owner's
+direction** (external Codex/Gemini review deferred this pass).
+
+### W0 — governance spine + clean-room CI guard
+- ENGINE-CONTRACTS sections 11–16 (agents, per-skill references, templates/prompts,
+  hooks spec-only, connector/SSRF, free-path-mandatory) + the DAG-spans-agents
+  amendment + the optional `## Capability routing` section in canonical order.
+- CAPABILITY-TIERS capability→tier map + machine-parseable routing-block spec;
+  `references/shared/{cwv,wcag,schema,eeat,anti-slop}.md`; clean-room `AGENTS.md`;
+  NOTICE Common Crawl Terms-of-Use attribution.
+- Clean-room CI guard: `verify_release.py` 23 → 37 checks (third-party names/markers/
+  source-headers, sync/lock, per-class provenance, cited-reference resolution, the
+  named handoffs, count-band, stdlib-only with dynamic-import detection); a stdlib
+  `unittest` suite + a CI unittest job; `csv_to_report` redacts contact PII by default.
+
+### W1a — free-first script backbone
+- `net_safety.py` shared SSRF guard (`validate_url` + IP-pinned `safe_open` closing
+  DNS-rebinding TOCTOU), `page_fetch.py`, `site_map.py`, `cost_guard.py` (fail-open),
+  the audit-math trio (`business_type`/`crawl_inventory`/`audit_aggregate`), a
+  `capability_probe.py` env-var extension; existing fetchers retrofitted through the
+  shared guard.
+
+### W1a — design-engine ranker (the moat, behind a revert flag)
+- `match.py`: weighted per-corpus IDF + field weights + length-norm + difflib fuzzy +
+  confidence-floor/tie-margin honesty replaces raw token-overlap, sharpening palette
+  and typography toward each product's own mood (generic high-frequency tokens no
+  longer dominate); style and pattern are unchanged. `DPS_RANKER=legacy` reverts
+  byte-for-byte for one release; `gen_palettes` byte-reproducibility and the
+  explicit-style-override regression are preserved.
+
+### W2 — the agent scaffold (template + one proof leaf)
+- `agents/_TEMPLATE.md` authoring scaffold + the `seo-technical` proof agent; the
+  `## Capability routing` + machine-parseable `## Output contract` shape every leaf fills.
+- verify_release gains C3 (agent well-formedness; name/file/sibling parity; dispatch-
+  shape do-not-match), C5 (least-privilege frontmatter — a fetch-only agent may not also
+  hold Bash), and C4 (every routing-block skill ships a real on-disk Tier-2 exercised by
+  a golden example); `test_agents.py`, `test_tier2_present.py`.
+
+### W3 — flagship depth (SEO + design differentiators)
+- **SEO (W3a):** `seo-cluster` (SERP-overlap `serp_cluster.py` + from-scratch
+  `cluster-map.html`), `seo-drift` (SQLite baseline/compare/history + severity engine),
+  `seo-local-unified` (`nap_check.py` + `geogrid.py` SoLV over free Nominatim), `seo-geo`
+  (weighted GEO scorecard + passage citability); leaf scripts RED-first.
+- **Design (W3b):** `match.py` wired under `design_system.py`; `gen_charts.py` +
+  `chart-types.csv`; `a11y_static.py`; `card/muted/border/ring/destructive` palette slots
+  (still byte-reproducible); per-skill references (ranking, anti-slop, chart-selection,
+  competitor-rubric, white-space-method, visual-qa, structural-checks).
+- **seo-strategy (W3c):** an original six-stage evidence loop (Baseline / Diagnose /
+  Cluster / Prioritize / Produce / Verify) derived from the plugin's own engine
+  subsystems — not any external four-stage framework — plus five vertical templates from
+  `business_type.py`. Authored source-closed; the PROVENANCE method note records that
+  the third-party framework's source text was not opened during authoring. No
+  `prompts.lock`, no sync script, no attribution header.
+
+### W4 — orchestrator wiring (real parallel fan-out)
+- **`seo-audit`** now dispatches real Agent-tool sub-agents in parallel — 5 always-on
+  (`seo-page` / `seo-technical` / `seo-schema` / `seo-sitemap` / `seo-image-audit`) + 6
+  conditional (`seo-content` / `seo-geo` / `seo-local-unified` / `seo-ecommerce` /
+  `seo-google` / `seo-backlinks`) dispatched-leaf agents — fanned in through
+  `audit_aggregate.py`'s re-normalized health score. New references
+  `references/seo-audit/{dispatch-matrix,scoring-weights}.md`; the stale
+  30/30/15/10/15 prose is reconciled to the real weight table.
+- **`parallel-build`** fans out N build sub-agents behind the shared-token barrier →
+  optional N×`design-visual-qa` agents for per-variant comparison; **`qa-gate`** phase 3
+  → `design-accessibility` agent, phase 7 → `seo-page` agent, phase 4 → `seo-google`
+  (cost-guard fail-open before any paid call).
+- 12 dispatched-leaf agents authored just-in-time — each wraps its sibling skill with no
+  forked logic and least-privilege tools. verify_release gains C3 dispatch↔disk parity
+  (every dispatched specialist has an agent; every agent is wired to an orchestrator);
+  `test_dag.py` proves the skill+agent graph is acyclic. The dispatch split is **5 + 6**
+  (derived from our own specialists, not the source's 8 + 7).
+- Truth-in-advertising: the `backlinks` Tier-2 in `capability_probe.py` and
+  CAPABILITY-TIERS now names the real WebSearch mention/linking-domain free path rather
+  than the unshipped `backlinks_discover.py` (the Common-Crawl web-graph scripts are
+  deferred to v1.1).
+
+### W5 — status-truth & release certification
+- **Depth tiers (Core / Lite / routing)** added to `SHIPPING.md` as a machine-readable
+  partition + narrative; the promotion checklist gains Core criteria (orchestrator
+  parity C3, free-path proof C4, depth proof C1/C5).
+- verify_release gains **C10** — the three tiers partition the 45 skills on disk exactly
+  (no skill missing / invented / double-counted) and the `14 Core / 28 Lite / 3 routing`
+  breakdown triangulates across SHIPPING / README / plugin.json — and **C2** — no trigger
+  phrase is claimed by two skills (the `AI visibility` collision between `seo-dataforseo`
+  and `seo-geo` is disambiguated to `AI visibility check` vs `AI visibility optimization`).
+- Version bumped **0.4.3 → 1.0.0** across plugin.json + marketplace.json; the wave log is
+  consolidated into the single v1.0.0 release entry above.
+
+## v0.4.3 — 2026-06-28 — skill-description cleanup + correctness pass
+
+A plugin-wide professionalization pass driven by a 51-agent audit of all 45 skills
+against the engine contracts, clean-room rules, and doc consistency. Codex-gated
+(round 1 DO-NOT-SHIP → round 3 SHIP); gates green (smoke 36/36, release 23/23).
+
+### Descriptions + triggers
+- Audited and tightened skill `description:` frontmatter across the suite for clarity,
+  accuracy, and free-first framing — each now claims only what its body delivers and is
+  YAML-safe (no colon-space in the scalar).
+- De-duplicated colliding trigger phrases: `baseline` → `SEO baseline` (seo-drift, vs
+  design-visual-qa's visual baseline); dropped bare `compare competitors` /
+  `competitor comparison` from seo-competitor-pages; `AI visibility check` →
+  `AI-visibility data` (seo-dataforseo); `sanity check this` → `sanity-check what you
+  wrote` (route-codex-review).
+
+### Correctness + contracts
+- Fixed bare `scripts/...` invocations that resolve to the user's CWD once installed —
+  `seo-firecrawl`, `seo-google`, `seo-image-gen` now call bundled scripts via
+  `${CLAUDE_PLUGIN_ROOT}`.
+- Broke two dependency cycles (`copywriting`↔`design-cro`,
+  `seo-cluster`↔`seo-content-brief`) by moving the back-edge to a Notes "Related skills"
+  line, preserving the one-directional orchestrator→specialist DAG.
+- Truth-in-advertising: `seo-sitemap` "rejects" → "flags sampled" URLs;
+  `client-outreach` "compliant list" → "compliance-checklist fields"; `seo-strategy`
+  drops the "original methodology" framing for the Evidence Loop.
+
+### Docs + metadata
+- README enumerates all 45 skills (added `blast-prompt`); `references/README` indexes
+  `CAPABILITY-TIERS.md` and corrects the `html-extract` output path; `extensions/README`
+  DataForSEO "used by" list corrected to all 10 consuming skills.
+- Unified and front-loaded the `plugin.json` / `marketplace.json` description ("45 stable
+  skills" first) and broadened keywords with SEO terms.
+
 ## v0.4.2 — 2026-06-22 — judge-panel correctness pass
 
 Acted on a multi-judge review (six specialist judges + an adversarial red-team).
@@ -180,7 +310,7 @@ structural pass, Codex adversarial code review).
 - Replaced the MIT license with a placeholder **commercial license** (`LICENSE`),
   flagged for final legal review.
 - Added `NOTICE.md`, `PRIVACY.md`, `SUPPORT.md`, `REFUNDS.md`.
-- Renamed the third-party "FLOW" methodology to an original **Evidence Loop**.
+- Renamed a third-party SEO methodology to an original **Evidence Loop**.
 
 ### Truth in advertising
 - Introduced `SHIPPING.md` as the source of truth for skill status.

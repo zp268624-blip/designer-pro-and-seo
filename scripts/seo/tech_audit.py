@@ -22,11 +22,17 @@ Usage:
 """
 import argparse
 import json
+import os
 import re
 import sys
 from urllib.parse import urlparse, urljoin
-from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
+
+# --- shared SSRF guard (local sibling in scripts/workflow) -------------------
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "workflow"))
+from net_safety import (  # noqa: E402
+    safe_open, validate_url, UrlValidationError, SafeFetchError,
+)
 
 UA = "Mozilla/5.0 (compatible; designer-pro-seo-techaudit/1.0)"
 TRAINING_BOTS = ["GPTBot", "ClaudeBot", "Google-Extended", "CCBot", "Bytespider"]
@@ -40,15 +46,30 @@ SEC_HEADERS = {
 
 
 def fetch(url, timeout=10):
-    """Return (html, headers_dict, error). headers lowercased."""
+    """Return (html, headers_dict, error). headers lowercased. Routed through the
+    shared net_safety.safe_open, which validates the URL and EVERY redirect hop before
+    fetching it -- a redirect to an internal IP / cloud-metadata host is refused like a
+    direct one. Never raises; a blocked URL or transport failure returns an error."""
     try:
-        req = Request(url, headers={"User-Agent": UA})
-        with urlopen(req, timeout=timeout) as resp:
-            raw = resp.read(2_000_000).decode("utf-8", "replace")
-            headers = {k.lower(): v for k, v in resp.headers.items()}
-            return raw, headers, None
-    except (URLError, HTTPError, ValueError, TimeoutError) as e:
+        resp, _chain = safe_open(url, timeout=timeout, headers={"User-Agent": UA})
+    except (UrlValidationError, SafeFetchError) as e:
         return None, {}, str(e)
+    except (URLError, HTTPError, ValueError, TimeoutError, OSError) as e:
+        return None, {}, str(e)
+    try:
+        status = getattr(resp, "status", None) or getattr(resp, "code", None)
+        if status is not None and status >= 400:
+            return None, {}, "HTTP %s" % status
+        raw = resp.read(2_000_000).decode("utf-8", "replace")
+        headers = {k.lower(): v for k, v in resp.headers.items()}
+        return raw, headers, None
+    except (URLError, HTTPError, ValueError, TimeoutError, OSError) as e:
+        return None, {}, str(e)
+    finally:
+        try:
+            resp.close()
+        except Exception:
+            pass
 
 
 def fetch_robots(url, timeout=8):

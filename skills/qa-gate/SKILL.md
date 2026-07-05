@@ -1,6 +1,6 @@
 ---
 name: qa-gate
-description: Run a 9-phase pre-delivery QA and stress test on a build, producing PASS/CONDITIONAL/FAIL plus Risk Rating (Low/Med/High/Critical), Critical Issues, Warnings, Recommendations, Nice-to-Haves, Estimated Fix Time, and Client-Ready Status. Trigger when the user says "qa check", "is this ready to ship", "pre-delivery review", "client-ready check", "stress test the site", or before any client handoff.
+description: Run a 9-phase pre-delivery QA gate on a build and return a PASS/CONDITIONAL/FAIL verdict with a risk rating (Low/Medium/High/Critical), bucketed findings (critical issues, warnings, recommendations, nice-to-haves), an estimated fix time, and an explicit client-ready YES/NO. Uses the Playwright extension when connected for live functional, visual, and performance checks; otherwise runs the static path and marks live-only checks N/A. Trigger when the user says "qa check", "qa gate", "is this ready to ship", "client-ready check", "pre-delivery review", or "stress test the site".
 ---
 
 # qa-gate
@@ -39,15 +39,20 @@ reports; remediation happens in the appropriate skills.
    1. **Functional** — forms submit, links resolve, no console JS errors.
    2. **Visual fidelity** — matches the design system; responsive at 375/768/1280;
       no broken layouts. (Playwright deepens this; `design-visual-qa` for diffs.)
-   3. **Accessibility** — delegate to `design-accessibility` (axe + WCAG AA). Static
-      fallback: check contrast, alt text, heading order, labels, focus visibility.
+   3. **Accessibility** — dispatch the `design-accessibility` agent (axe + WCAG AA
+      when Playwright is connected; else its bundled `a11y_static.py` structural
+      checks — contrast, alt text, heading order, labels, focus visibility).
    4. **Performance** — Core Web Vitals (LCP < 2.5s, CLS < 0.1, INP < 200ms).
-      Use `seo-google` (PSI/CrUX) if available; else flag for field verification.
+      Dispatch the `seo-google` agent for PSI/CrUX field data when a key/MCP is
+      connected (the free PSI/CrUX key is preferred; any paid call routes through
+      `cost_guard.py`, which fails open to the free path); else flag CWV for field
+      verification.
    5. **Security** — HTTPS, security headers, no exposed secrets in source, audit
       third-party scripts.
    6. **Content completeness** — no lorem ipsum, no broken images, no placeholder
       copy; compare against the brief for missing pieces.
-   7. **SEO baseline** — delegate to `seo-page` (title, meta, OG, schema, canonical).
+   7. **SEO baseline** — dispatch the `seo-page` agent (title, meta, OG, schema,
+      canonical, images, internal links) as a real fan-out, not a prose handoff.
    8. **Cross-device / browser** — sanity at key breakpoints/browsers.
    9. **Deployment readiness** — env vars set, redirects, analytics installed, DNS.
 4. **Apply the verdict rule.** Any unresolved CRITICAL ⇒ OVERALL = FAIL and
@@ -66,8 +71,10 @@ an explicit client-ready YES/NO.
 ## Dependencies
 
 - `templates/qa-report-template.md` (required)
-- `design-accessibility` (phase 3), `seo-page` (phase 7), `seo-google` (phase 4),
-  `design-visual-qa` (phase 2/8) — all orchestrated one-directionally
+- `design-accessibility` (optional — adds axe/WCAG delegation; free path: static contrast/alt/heading/label/focus checks) — phase 3
+- `seo-page` (optional — adds full on-page SEO pass; free path: inline title/meta/OG/canonical check) — phase 7
+- `seo-google` (optional — adds PSI/CrUX field data; free path: flag CWV for field verification) — phase 4
+- `design-visual-qa` (optional — adds screenshot diffs; free path: manual visual review) — phase 2/8
 - Playwright extension (optional — deepens phases 2/3/4/8; static path otherwise)
 
 ## Notes

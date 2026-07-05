@@ -34,6 +34,20 @@ clean-room, publicly-released plugin these have been handled as follows:
   written for this plugin. If any third-party trademark concern is identified,
   rename per `references/PROVENANCE.md`.
 
+## Common Crawl (open web-graph data, queried not redistributed)
+
+Some optional free-path features (e.g. host-level backlink and authority-proxy
+discovery) can query the **Common Crawl** public web-graph and index, an openly
+available dataset published by the Common Crawl Foundation. The plugin reads
+Common Crawl data over the network at the user's request and derives its own
+metrics from it; it **does not bundle, mirror, or redistribute** any Common Crawl
+files. Use of Common Crawl data is subject to the Common Crawl **Terms of Use**
+(<https://commoncrawl.org/terms-of-use>), which the plugin honors — including the
+expectation that users comply with those terms and respect the rights of the
+crawled sites. No Common Crawl content ships with this plugin; the free path
+degrades gracefully (cached or honest "unavailable") when the dataset is
+unreachable. See `references/PROVENANCE.md` for the clean-room method.
+
 ## Optional external services (not bundled)
 
 The plugin can *call* these when the user has installed/configured them

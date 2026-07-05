@@ -33,8 +33,10 @@ claude --plugin-dir designer-pro-and-seo
 From a clone you can also run the bundled checks from the repo root —
 `python3 scripts/smoke_test.py` (use `py` on Windows).
 
-> **Shipping status (v0.4.x).** **45 of 45 skills are Stable** (real steps, real
-> scripts/data, graceful degradation without paid APIs, smoke-tested). Every skill
+> **Shipping status (v1.0.0 "Deep Core").** **45 of 45 skills are Stable** — **14 Core,
+> 28 Lite, 3 routing** (real steps, real scripts/data, graceful degradation without paid
+> APIs, smoke-tested). Core skills are 3-layer (earned references + real Agent-tool
+> fan-out); Lite skills are Stable single-file, deepened next in v1.1. Every skill
 > that can use an external tool is **tool-aware**: it uses a dedicated MCP/CLI when
 > present and falls back to Claude's built-in web/browser tools + bundled scripts
 > otherwise (`references/CAPABILITY-TIERS.md`). Skill descriptions describe only what
@@ -47,7 +49,7 @@ plugin collapses the loop — research → design → build → SEO → QA → p
 single bundle with shared infrastructure, so you stop re-explaining the project to
 five disconnected tools.
 
-## Shipping skills (v0.4.x) — 45 stable, mostly free-tier
+## Shipping skills (v1.0.0) — 45 Stable, mostly free-tier
 
 The whole loop runs end to end on the free tier. Highlights:
 
@@ -56,7 +58,7 @@ The whole loop runs end to end on the free tier. Highlights:
   accessible HTML page via the engine) → `design-tokens-emit` (CSS/Tailwind/SCSS) →
   `qa-gate` → `portable-html-port` (any CMS). Plus `design-system-persist`,
   `design-cro`, `design-accessibility`, `parallel-build`, `html-extract`,
-  `design-research`, `design-visual-qa`.
+  `design-research`, `design-visual-qa`, `blast-prompt`.
 - **Content:** `copywriting`, `content-draft`, `csv-to-report`.
 - **SEO (23):** `seo-audit` orchestrator over `seo-page`, `seo-technical`,
   `seo-schema`, `seo-sitemap`, `seo-image-audit`, `seo-content`, `seo-content-brief`,
@@ -68,9 +70,9 @@ The whole loop runs end to end on the free tier. Highlights:
   `route-gemini-context`.
 
 Backed by 13 stdlib-only CLI tools (design engine + palette generator, page
-renderer, token emitter, HTML porter, CSV profiler, capability probe, and SEO tools
-for schema/sitemap/tech-audit/GEO/hreflang/drift), plus a smoke test and a release
-verifier — 15 scripts total. From a clone, `python3 scripts/smoke_test.py` verifies
+renderer, token emitter, HTML porter, CSV profiler, capability probe, a shared SSRF
+guard + an SSRF-guarded page fetcher, and SEO tools for schema/sitemap/tech-audit/GEO/hreflang/drift), plus a smoke
+test and a release verifier — 32 scripts total. From a clone, `python3 scripts/smoke_test.py` verifies
 the bundled scripts. See **QUICKSTART.md**.
 
 ## Tool-aware, not paid-gated

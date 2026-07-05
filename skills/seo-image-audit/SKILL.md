@@ -1,6 +1,6 @@
 ---
 name: seo-image-audit
-description: Audit a page's images for SEO and performance — alt text, file size, modern formats (WebP/AVIF), responsive srcset, lazy loading, CLS prevention, and optional image SERP rankings. Trigger when the user says "image seo", "alt text", "image optimization", "image audit", "convert to webp", "image metadata", or "image rankings".
+description: Audit a page's images for SEO and performance — alt text, file size, modern formats (WebP/AVIF), responsive srcset, lazy loading, and CLS-safe dimensions, plus ready-to-run conversion commands. Uses DataForSEO for live image-SERP rankings when connected; otherwise audits from page fetch and parsing alone. Trigger when the user says "image seo", "image audit", "alt text", "image optimization", "convert to webp", "convert to avif", or "image performance".
 ---
 
 # seo-image-audit

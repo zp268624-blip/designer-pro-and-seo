@@ -1,0 +1,27 @@
+# Fixture: a "citable but opted out of training" robots policy.
+# AI training crawlers are blocked at the root; AI retrieval/search crawlers are
+# explicitly allowed so the site stays eligible for AI-answer citation.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Disallow:
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Disallow:
+
+User-agent: *
+Disallow:

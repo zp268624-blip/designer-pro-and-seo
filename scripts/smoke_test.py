@@ -230,7 +230,7 @@ def main():
         # geo_check counts a short, sourced, standalone stat as citable (no word floor)
         gp = os.path.join(td, "stat.md")
         open(gp, "w", encoding="utf-8").write(
-            "Salesforce holds 23% market share as of January 2026, per Gartner.\n")
+            "Northwind Retail holds 23% market share as of January 2026, per the Beacon Index.\n")
         rg2 = subprocess.run(py() + [os.path.join(ROOT, "scripts", "seo", "geo_check.py"),
              "--content", gp, "--no-network"], capture_output=True, encoding="utf-8")
         citable_ok = False

@@ -7,9 +7,10 @@ with this file. (See README for the narrative version.)
 Legend: ✅ Stable (built, verified, supported) · 🟡 In development (scaffolded,
 not released, excluded from functional claims & support).
 
-Total skills: 45 (**45 ✅ Stable**, 0 🟡 In development).
+Total skills: 45 (**45 ✅ Stable**, 0 🟡 In development). Depth: **14 Core · 28 Lite ·
+3 routing** (see [Depth tiers](#depth-tiers-core--lite--routing--a-partition-of-the-45)).
 
-## ✅ Shipping (v0.4.x) — 45 skills
+## ✅ Shipping (v1.0.0) — 45 skills
 
 **Design (10):** `design-system-gen`, `design-dimensions`, `design-motion`,
 `design-system-persist`, `design-build`, `design-tokens-emit`, `design-cro`,
@@ -33,6 +34,32 @@ Total skills: 45 (**45 ✅ Stable**, 0 🟡 In development).
 Most are free-tier; optional paid tools (DataForSEO, Playwright, Google APIs) only
 *deepen* them. Each skill that can use one is **tool-aware** and has a documented
 free/built-in path — see `references/CAPABILITY-TIERS.md`.
+
+## Depth tiers (Core / Lite / routing) — a partition of the 45
+
+Orthogonal to Stable, every Stable skill also sits in one **depth tier** — the honest
+"how deep is it" signal introduced with v1 "Deep Core."
+
+- **Core (14)** — deepened this release into a real 3-layer skill: earned per-skill
+  `references/` and/or a wired dispatch layer (real Agent-tool fan-out, plus the
+  flagship differentiators). These are the skills v1 raises to a higher level.
+- **Lite (28)** — Stable, with a real free/built-in path, but single-file; slated for
+  the same depth pass in **v1.1 "Depth Sweep."** Lite means "not yet 3-layer," not
+  "lesser quality."
+- **Routing (3)** — the three-brain hand-off skills (Claude drives; Codex reviews;
+  Gemini long-context).
+
+The three lists **partition the 45 skills on disk exactly** — the release gate (C10)
+fails if any skill is missing, invented, or double-counted, so the count claim is
+mechanically un-fakeable.
+
+```depth-tiers
+core:    design-system-gen, design-build, design-research, design-accessibility, design-visual-qa, qa-gate, parallel-build, portable-html-port, seo-audit, seo-cluster, seo-drift, seo-geo, seo-local-unified, seo-strategy
+lite:    design-dimensions, design-motion, design-system-persist, design-tokens-emit, design-cro, blast-prompt, html-extract, copywriting, content-draft, csv-to-report, client-outreach, seo-page, seo-technical, seo-schema, seo-sitemap, seo-image-audit, seo-content, seo-content-brief, seo-sxo, seo-hreflang, seo-competitor-pages, seo-programmatic, seo-ecommerce, seo-google, seo-dataforseo, seo-firecrawl, seo-backlinks, seo-image-gen
+routing: route-three-brain, route-codex-review, route-gemini-context
+```
+
+**45 Stable = 14 Core + 28 Lite + 3 routing.**
 
 ## 🟡 In development — 0 skills
 
@@ -66,3 +93,17 @@ A skill ships only when **all** are true:
    marker, and `**Status:**` reads `Stable`.
 5. Verification by type: script/data-backed skills pass `scripts/smoke_test.py`;
    method-only skills contain a complete worked method.
+
+### Core promotion (✅ Stable → **Core**)
+
+A Stable skill earns the **Core** depth tier only when it is genuinely 3-layer:
+
+6. **Orchestrator parity (C3)** — if it dispatches, every specialist it names resolves
+   to an agent on disk (and is itself wired), and the dispatch shape is derived, not
+   mirrored.
+7. **Free-path proof (C4)** — its Tier-2 names a real on-disk script exercised by a
+   golden example under `references/examples/` (or is C4-exempt-by-spec).
+8. **Depth proof (C1 + C5)** — every cited `references/…` path resolves, and any
+   dispatched-leaf agent passes least-privilege.
+
+Everything Stable-but-single-file stays **Lite** until it earns this pass (v1.1).

@@ -9,7 +9,6 @@ Deep documentation that skills load on-demand. Lives here (not inline in SKILL.m
 - Industry-vertical guides (restaurant SEO checklist, healthcare LocalBusiness specifics)
 - Platform-specific quirks (WordPress block escaping, GoHighLevel embed limits, Webflow CMS bindings)
 - Source attribution notes (which external concepts informed which skill, link to the original where appropriate)
-- Inspiration captures from `html-extract` (saved to `references/inspiration/`)
 
 ## What doesn't go here
 
@@ -18,15 +17,18 @@ Deep documentation that skills load on-demand. Lives here (not inline in SKILL.m
 
 ## Status
 
-In use. Present: `PROVENANCE.md` (clean-room ledger), `ENGINE-CONTRACTS.md`
-(interface spec), `examples/` (golden outputs for shipping skills). Grows as more
-skills ship.
+In use. Present: `ENGINE-CONTRACTS.md` (interface spec), `CAPABILITY-TIERS.md`
+(tool-aware routing cascade, loaded on-demand by several skills), `PROVENANCE.md`
+(clean-room ledger), `DEEP-DIVE-ANALYSIS.md` (archived roadmap, kept for
+provenance), `README.md` (this file), and `examples/` (golden outputs for shipping
+skills). Grows as more skills ship.
 
 ## Subfolder convention
+
+*Planned namespaces — created as skills need them; not all are present yet.*
 
 - `references/wcag/` — WCAG 2.2 quick references, axe rule details
 - `references/schema/` — Schema.org type cheatsheets
 - `references/platforms/` — WP / GHL / Webflow / Wix / Framer / Squarespace specifics
 - `references/verticals/` — industry-specific SEO guides
-- `references/inspiration/` — html-extract outputs (gitignored or per-project)
 - `references/protocols/` — multi-skill workflows (parallel-build, qa-gate)

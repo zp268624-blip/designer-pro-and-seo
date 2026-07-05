@@ -44,6 +44,7 @@ which dimension fell back to heuristics when a library is absent.
 - UTF-8, comma-separated, header row first
 - One concept per row; `tags` column holds semicolon-separated tags
 - Final `source` + `license` columns where a row derives from an external primary
+  (font-pairing provenance is tracked centrally in `references/PROVENANCE.md`, not per-row)
 - Final `notes` column may point to deeper docs in `references/`
 
 ## Status

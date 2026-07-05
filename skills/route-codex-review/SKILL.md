@@ -1,6 +1,6 @@
 ---
 name: route-codex-review
-description: Forced adversarial review pre-delivery — hands Claude-generated code, content, or plans to Codex (GPT-5.5) to find bugs, security risks, missing tests, and missed edge cases. Trigger when the user says "review the code you wrote", "check your work", "second opinion", "sanity check this", "adversarial review", or before client-bound delivery of substantial Claude output.
+description: Forced adversarial review pre-delivery — hands Claude-generated code, content, or plans to Codex (GPT-5.5) to find bugs, security risks, missing tests, and missed edge cases. Trigger when the user says "review the code you wrote", "check your work", "second opinion", "sanity-check what you wrote", "adversarial review", or before client-bound delivery of substantial Claude output.
 ---
 
 # route-codex-review
@@ -19,7 +19,7 @@ client or production, or whenever the user asks to verify Claude's work.
 
 - "review the code you wrote" / "review what you just did"
 - "check your work" / "look over what you wrote" / "give it a once-over"
-- "second opinion" / "sanity check this code" / "double-check this"
+- "second opinion" / "sanity-check what you wrote" / "double-check this"
 - "adversarial review" / "have codex review" / "is this right"
 
 > Scoped to **Claude's own output**. Bare "audit this" / "audit my site" belongs
@@ -54,8 +54,9 @@ client or production, or whenever the user asks to verify Claude's work.
 
 ## Dependencies
 
-- The `codex` CLI installed (or the adjacent `openai-codex` tool). Degrades to a
-  documented, different-lens manual review when absent.
+- The `codex` CLI (or the adjacent `openai-codex` tool) (optional — adds an
+  independent GPT-5.5 adversarial pass; free path: a structured manual review from
+  a different lens, never a same-model self-review).
 
 ## Notes
 

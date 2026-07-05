@@ -36,3 +36,7 @@ docs/
 
 # Clean-room denylist — real client/brand names kept local, never shipped
 .clean-room-denylist
+
+# Clean-room third-party guard — inspiration on-disk counts/column schemas +
+# name/marker denylist + owner-tool allowlist; literals stay local, never shipped
+.cleanroom-thirdparty

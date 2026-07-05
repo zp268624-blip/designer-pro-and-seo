@@ -32,11 +32,11 @@ sitemap and fetches the pages you point it at — a real, useful map on the free
 ## Steps
 
 1. **Detect tooling.** Check whether the Firecrawl MCP is exposed this session
-   (`scripts/workflow/capability_probe.py` also reports `FIRECRAWL_API_KEY`).
+   (run `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/workflow/capability_probe.py"` — it also reports `FIRECRAWL_API_KEY`).
 2. **Crawl path (Tier 1, if connected).** Run the Firecrawl MCP crawl/map/scrape for
    the requested depth; return the URL inventory + per-page markdown + broken links.
 3. **Built-in path (Tier 2, always available).** Fetch `sitemap.xml` (or the given
-   sitemap) and run `scripts/seo/sitemap_tools.py --validate` to get a structured URL
+   sitemap) and run `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/seo/sitemap_tools.py" --validate` to get a structured URL
    inventory; fetch the priority pages with WebFetch; flag fetch failures as likely
    broken links. State that JS-rendered-only content and large-scale crawls need Tier 1.
 4. **Report which tier ran** and what a full Firecrawl crawl would add.

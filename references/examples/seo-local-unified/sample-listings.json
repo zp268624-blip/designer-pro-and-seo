@@ -1,0 +1,14 @@
+{
+  "business": "Cedar Creek Plumbing",
+  "listings": [
+    {"source": "website", "name": "Cedar Creek Plumbing LLC",
+     "address": "123 Main St, Suite 200", "phone": "(801) 555-0199",
+     "primary": true},
+    {"source": "search-directory", "name": "Cedar Creek Plumbing LLC",
+     "address": "123 Main Street Ste 200", "phone": "801-555-0199"},
+    {"source": "review-directory", "name": "Cedar Creek Plumbing LLC",
+     "address": "123 Main St #200", "phone": "801-555-0142"},
+    {"source": "social-directory", "name": "Cedar Creek Plumbing LLC",
+     "address": "123 Main St Suite 200", "phone": "+1 801 555 0199"}
+  ]
+}
