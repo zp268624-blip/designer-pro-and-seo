@@ -1,5 +1,18 @@
 # Release Notes
 
+## v1.0.1 — 2026-07-04 — docs clarity pass
+
+README + marketplace-description polish only — no code or skill-behavior change (gates
+unchanged: smoke 36/36, 477 unit tests, verify_release 56/56):
+- Dropped the originality/clean-room marketing from the README and the plugin
+  description; kept the MIT license note. The from-scratch authoring discipline and the
+  PROVENANCE ledger are unchanged internally.
+- Reframed "Why this plugin exists" — web design and SEO work hand-in-hand when building
+  a site rather than being literally one workflow; clarified that "QA" is the
+  pre-delivery quality-assurance gate (not Q&A) and why it sits late in the loop.
+- Added a full 45-skill catalog with a one-line definition each; Core skills marked.
+- Glossed "stdlib" as standard-library-only Python (nothing to pip install).
+
 ## v1.0.0 — 2026-07-04 — v1 "Deep Core"
 
 The first deep release: a real parallel-dispatch SEO audit, deep original flagships,

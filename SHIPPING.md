@@ -10,7 +10,7 @@ not released, excluded from functional claims & support).
 Total skills: 45 (**45 ✅ Stable**, 0 🟡 In development). Depth: **14 Core · 28 Lite ·
 3 routing** (see [Depth tiers](#depth-tiers-core--lite--routing--a-partition-of-the-45)).
 
-## ✅ Shipping (v1.0.0) — 45 skills
+## ✅ Shipping (v1.0.1) — 45 skills
 
 **Design (10):** `design-system-gen`, `design-dimensions`, `design-motion`,
 `design-system-persist`, `design-build`, `design-tokens-emit`, `design-cro`,
