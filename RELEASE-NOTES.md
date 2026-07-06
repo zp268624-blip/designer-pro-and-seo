@@ -1,5 +1,11 @@
 # Release Notes
 
+## v1.0.3 — 2026-07-05 — acknowledgements
+
+Added an "Acknowledgements & inspiration" note to NOTICE.md crediting the Skool
+community whose ideas sparked the project's direction. No code, skill, or gate change;
+no community material is bundled or redistributed.
+
 ## v1.0.2 — 2026-07-05 — README banner
 
 Added a header banner image (`assets/banner.png`) at the top of the README. No code,

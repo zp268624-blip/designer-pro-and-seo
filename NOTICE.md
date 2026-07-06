@@ -6,6 +6,13 @@ ships publicly on GitHub under the MIT License (see `LICENSE`). This file record
 the few places where third-party material, standards, or externally defined
 concepts are involved, and the terms under which they appear.
 
+## Acknowledgements & inspiration
+
+The vision and many of the ideas behind this plugin were sparked by the **AI
+Automations by Jack** Skool community — sincere thanks to Jack and everyone there.
+Those ideas inspired the approach; the plugin's code, content, and data are authored
+independently for this plugin, and no community material is bundled or redistributed.
+
 ## Standards & specifications (referenced, not copied)
 
 These are public technical standards. The plugin references and implements
