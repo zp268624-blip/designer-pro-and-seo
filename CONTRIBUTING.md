@@ -21,6 +21,32 @@ Code plugin developed in the open. Issues and pull requests are welcome.
   offers a `--human` ASCII view. Invoke bundled scripts from skills via
   `python3 "${CLAUDE_PLUGIN_ROOT}/scripts/..."` so they resolve when installed.
 
+## Submitting a change (fork → pull request)
+
+1. **Fork** this repo (the **Fork** button, top-right) — you get a copy under your account.
+2. **Clone your fork** and enter it:
+   ```
+   git clone https://github.com/YOUR-USERNAME/designer-pro-and-seo
+   cd designer-pro-and-seo
+   ```
+3. **Create a branch** (don't work on `main`):
+   ```
+   git checkout -b my-change
+   ```
+4. **Make your change**, following the ground rules above.
+5. **Run both gates** (see below) — they must pass.
+6. **Commit and push to your fork:**
+   ```
+   git add -A && git commit -m "Describe the change"
+   git push origin my-change
+   ```
+7. **Open a pull request** against `ZachArticulateV/designer-pro-and-seo` `main` —
+   GitHub shows a "Compare & pull request" button after you push. Say what changed and why.
+
+For a one-line doc fix you can skip the terminal entirely: click the ✏️ pencil on any
+file here and GitHub will fork + open the PR for you. For anything larger, open an issue
+first so we can align before you build.
+
 ## Before you open a PR
 
 Run both gates from the repo root (use `py` instead of `python3` on Windows):

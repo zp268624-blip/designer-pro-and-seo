@@ -1,5 +1,12 @@
 # Release Notes
 
+## v1.0.4 — 2026-07-05 — open contribution workflow
+
+Community contributions are now first-class (no code, skill, or gate change):
+- `CONTRIBUTING.md` documents the full fork -> branch -> run-the-gates -> pull-request flow.
+- Added a README "Contributing" section, a PR template, and bug / skill-idea issue
+  templates under `.github/`.
+
 ## v1.0.3 — 2026-07-05 — acknowledgements
 
 Added an "Acknowledgements & inspiration" note to NOTICE.md crediting the Skool
